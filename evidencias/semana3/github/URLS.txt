@@ -1,0 +1,8 @@
+owner=IvanDaniliuk01
+repo=https://github.com/IvanDaniliuk01/hospital-tpi
+issue1=https://github.com/IvanDaniliuk01/hospital-tpi/issues/1
+issue2=https://github.com/IvanDaniliuk01/hospital-tpi/issues/2
+pr=https://github.com/IvanDaniliuk01/hospital-tpi/pull/3
+rama=feature/1-compuerta-calidad-precommit
+main_protegida=True
+fecha=2026-10-05T14:35:14
