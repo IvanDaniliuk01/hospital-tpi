@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: hospital.pagos.ServicioDeCobroTest$ConMock
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.890 s -- in hospital.pagos.ServicioDeCobroTest$ConMock

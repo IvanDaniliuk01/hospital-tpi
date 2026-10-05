@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoriaPaciente.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II)</a> &gt; <a href="index.source.html" class="el_package">hospital.turnos</a> &gt; <span class="el_source">CategoriaPaciente.java</span></div><h1>CategoriaPaciente.java</h1><pre class="source lang-java linenums">package hospital.turnos;
+
+/**
+ * Categoría comercial de un paciente según su obra social.
+ *
+ * Reemplaza la cadena de if/else-if sobre strings mágicos (&quot;OSDE&quot;, &quot;SWISS&quot;,
+ * &quot;PUBLICA&quot;) que existía en el código original. Agregar una nueva obra social
+ * ahora implica tocar un solo lugar (el método {@link #desde(String)}).
+ */
+<span class="nc" id="L10">public enum CategoriaPaciente {</span>
+
+<span class="nc" id="L12">    PREMIUM(&quot;Paciente premium&quot;),</span>
+<span class="nc" id="L13">    PUBLICO(&quot;Paciente publico&quot;),</span>
+<span class="nc" id="L14">    SIN_CATEGORIA(null);</span>
+
+    private final String descripcion;
+
+<span class="nc" id="L18">    CategoriaPaciente(String descripcion) {</span>
+<span class="nc" id="L19">        this.descripcion = descripcion;</span>
+<span class="nc" id="L20">    }</span>
+
+    /** Devuelve la categoría que corresponde al código de obra social. */
+    public static CategoriaPaciente desde(String obraSocial) {
+<span class="nc bnc" id="L24" title="All 3 branches missed.">        switch (obraSocial) {</span>
+            case &quot;OSDE&quot;:
+            case &quot;SWISS&quot;:
+<span class="nc" id="L27">                return PREMIUM;</span>
+            case &quot;PUBLICA&quot;:
+<span class="nc" id="L29">                return PUBLICO;</span>
+            default:
+<span class="nc" id="L31">                return SIN_CATEGORIA;</span>
+        }
+    }
+
+    /** Texto que se muestra al usuario; {@code null} si no hay categoría. */
+    public String getDescripcion() {
+<span class="nc" id="L37">        return descripcion;</span>
+    }
+
+    public boolean tieneDescripcion() {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        return descripcion != null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

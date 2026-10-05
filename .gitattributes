@@ -1,0 +1,8 @@
+# Todo el repositorio con finales de linea LF (Spotless y google-java-format
+# esperan LF; los hooks de Git son scripts bash y fallan con CRLF).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+*.jar binary

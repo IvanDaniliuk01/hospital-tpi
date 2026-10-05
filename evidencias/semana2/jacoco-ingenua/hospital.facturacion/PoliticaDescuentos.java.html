@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PoliticaDescuentos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II)</a> &gt; <a href="index.source.html" class="el_package">hospital.facturacion</a> &gt; <span class="el_source">PoliticaDescuentos.java</span></div><h1>PoliticaDescuentos.java</h1><pre class="source lang-java linenums">package hospital.facturacion;
+
+import static hospital.facturacion.ReglasFacturacion.BONIFICACION_POR_TURNOS;
+import static hospital.facturacion.ReglasFacturacion.FACTOR_DESCUENTO_OBRA_SOCIAL;
+import static hospital.facturacion.ReglasFacturacion.PROPORCION_A_CARGO_CON_PLAN_DE_SALUD;
+import static hospital.facturacion.ReglasFacturacion.TURNOS_MINIMOS_PARA_BONIFICACION;
+
+/**
+ * Reúne las reglas de descuento y bonificación de la facturación.
+ *
+ * Estos métodos fueron primero extraídos (Extract Method) dentro de la
+ * calculadora y luego movidos aquí (Move Method) porque son reglas
+ * comerciales puras: dependen solo de la solicitud y de las constantes de
+ * negocio, no del proceso de cálculo. Así la calculadora orquesta y esta
+ * clase decide.
+ */
+<span class="nc" id="L17">public class PoliticaDescuentos {</span>
+
+    /** Importe que efectivamente paga el paciente por un estudio según su plan. */
+    public double importeACargoDelPaciente(double importeEstudio,
+                                           SolicitudFacturacion solicitud) {
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if (solicitud.tienePlanDeSalud()) {</span>
+<span class="nc" id="L23">            return importeEstudio * PROPORCION_A_CARGO_CON_PLAN_DE_SALUD;</span>
+        }
+<span class="nc" id="L25">        return importeEstudio;</span>
+    }
+
+    /** Aplica el 10 % de descuento de obra social si corresponde. */
+    public double aplicarDescuentoObraSocial(double subtotal,
+                                             SolicitudFacturacion solicitud) {
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (solicitud.tieneObraSocial()) {</span>
+<span class="nc" id="L32">            return subtotal * FACTOR_DESCUENTO_OBRA_SOCIAL;</span>
+        }
+<span class="nc" id="L34">        return subtotal;</span>
+    }
+
+    /** Descuenta la bonificación fija por fidelidad de turnos si corresponde. */
+    public double aplicarBonificacionPorTurnos(double subtotal,
+                                               SolicitudFacturacion solicitud) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (solicitud.getCantidadDeTurnos() &gt; TURNOS_MINIMOS_PARA_BONIFICACION) {</span>
+<span class="nc" id="L41">            return subtotal - BONIFICACION_POR_TURNOS;</span>
+        }
+<span class="nc" id="L43">        return subtotal;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
