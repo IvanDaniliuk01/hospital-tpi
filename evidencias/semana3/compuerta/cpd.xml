@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         pmdVersion="7.7.0"
+         timestamp="2026-10-05T14:24:17.9660863-03:00"
+         version="1.0.0"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\CalculadoraFacturacion.java"
+         totalNumberOfTokens="137"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\PoliticaDescuentos.java"
+         totalNumberOfTokens="91"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\ReglasFacturacion.java"
+         totalNumberOfTokens="40"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\SolicitudFacturacion.java"
+         totalNumberOfTokens="218"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\CobroNoProcesadoException.java"
+         totalNumberOfTokens="43"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ComprobanteDeCobro.java"
+         totalNumberOfTokens="193"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\PasarelaDePagos.java"
+         totalNumberOfTokens="17"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\PasarelaNoDisponibleException.java"
+         totalNumberOfTokens="26"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ResultadoPago.java"
+         totalNumberOfTokens="177"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ServicioDeCobro.java"
+         totalNumberOfTokens="230"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\CategoriaPaciente.java"
+         totalNumberOfTokens="88"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\Paciente.java"
+         totalNumberOfTokens="131"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\Turno.java"
+         totalNumberOfTokens="153"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\TurnoManager.java"
+         totalNumberOfTokens="213"/>
+</pmd-cpd>

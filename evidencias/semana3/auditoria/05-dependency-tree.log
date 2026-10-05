@@ -1,0 +1,31 @@
+> mvn -B -ntp dependency:tree
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy
+> 2026-10-05T14:21:35
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< ar.edu.utn.hospital:hospital-liquidacion-legacy >-----------
+[INFO] Building Hospital Central - Liquidacion de prestaciones (legacy, auditoria) 2.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.8.1:tree (default-cli) @ hospital-liquidacion-legacy ---
+[INFO] ar.edu.utn.hospital:hospital-liquidacion-legacy:jar:2.3.0
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] +- commons-lang:commons-lang:jar:2.6:compile
+[INFO] +- commons-collections:commons-collections:jar:3.2.1:compile
+[INFO] +- org.apache.commons:commons-text:jar:1.9:compile
+[INFO] |  \- org.apache.commons:commons-lang3:jar:3.11:compile
+[INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.9.8:compile
+[INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.0:compile
+[INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.9.8:compile
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.052 s
+[INFO] Finished at: 2026-10-05T14:21:35-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

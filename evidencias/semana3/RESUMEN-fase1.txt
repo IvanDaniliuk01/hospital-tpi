@@ -1,0 +1,25 @@
+Fase 1 completada: 2026-10-05T14:24:18
+
+== Versiones ==
+git version 2.49.0.windows.1
+java version "21.0.8" 2025-07-15 LTS
+Java(TM) SE Runtime Environment (build 21.0.8+12-LTS-250)
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.8+12-LTS-250, mixed mode, sharing)
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Maven home: C:\Users\PCDIM-2008\.m2\apache-maven-3.9.11
+Java version: 21.0.8, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-21
+Default locale: en_US, platform encoding: UTF-8
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+
+== Escenarios ==
+A-formatter: git commit codigo=1, commit creado=NO
+B-linter: git commit codigo=1, commit creado=NO
+C-pruebas: git commit codigo=1, commit creado=NO
+
+== Historia git ==
+* b3b5796 2026-10-05 14:20 chore(auditoria): snapshot del modulo heredado de liquidacion, objeto de la auditoria estatica (refs #2)
+* f3100fb 2026-10-05 14:18 feat(hooks): pre-commit secuencial formatter -> linter -> pruebas, pre-push y DoD v2.0 (#1)
+* 5448ebf 2026-10-05 14:18 style: aplicar google-java-format con Spotless a main y test (#1)
+* 4ba28c3 2026-10-05 14:18 build(calidad): Spotless, Checkstyle, PMD/CPD y versions-maven-plugin en el pom (#1)
+* 527d7f3 2026-10-05 14:18 docs(gobernanza): DoD v1.1, plantillas de Issue/PR y esquema de 25 etiquetas (TP Semana 1)
+* a330cb7 2026-10-05 14:18 chore: estado inicial v0.2.0 (TP Semana 2 - testing practico y contratos)

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SolicitudFacturacion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II)</a> &gt; <a href="index.source.html" class="el_package">hospital.facturacion</a> &gt; <span class="el_source">SolicitudFacturacion.java</span></div><h1>SolicitudFacturacion.java</h1><pre class="source lang-java linenums">package hospital.facturacion;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Parameter Object: agrupa los datos necesarios para facturar una atención.
+ *
+ * &lt;p&gt;Reemplaza la lista de parámetros primitivos {@code (List&lt;Double&gt; estudios, boolean p, boolean
+ * o, int t)} por un objeto con nombre propio, inmutable y validado en el constructor.
+ */
+public final class SolicitudFacturacion {
+
+  private final List&lt;Double&gt; importesDeEstudios;
+  private final boolean tienePlanDeSalud;
+  private final boolean tieneObraSocial;
+  private final int cantidadDeTurnos;
+
+  public SolicitudFacturacion(
+      List&lt;Double&gt; importesDeEstudios,
+      boolean tienePlanDeSalud,
+      boolean tieneObraSocial,
+<span class="fc" id="L24">      int cantidadDeTurnos) {</span>
+<span class="fc" id="L25">    this.importesDeEstudios = copiaValidada(importesDeEstudios);</span>
+<span class="fc" id="L26">    this.tienePlanDeSalud = tienePlanDeSalud;</span>
+<span class="fc" id="L27">    this.tieneObraSocial = tieneObraSocial;</span>
+<span class="fc" id="L28">    this.cantidadDeTurnos = cantidadDeTurnos;</span>
+<span class="fc" id="L29">  }</span>
+
+  private static List&lt;Double&gt; copiaValidada(List&lt;Double&gt; importes) {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">    if (importes == null) {</span>
+<span class="fc" id="L33">      throw new IllegalArgumentException(&quot;La lista de importes de estudios no puede ser null.&quot;);</span>
+    }
+<span class="fc bfc" id="L35" title="All 2 branches covered.">    for (int i = 0; i &lt; importes.size(); i++) {</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">      if (importes.get(i) == null) {</span>
+<span class="fc" id="L37">        throw new IllegalArgumentException(</span>
+            &quot;El importe del estudio en la posición &quot; + i + &quot; es null.&quot;);
+      }
+    }
+<span class="fc" id="L41">    return Collections.unmodifiableList(new ArrayList&lt;&gt;(importes));</span>
+  }
+
+  public List&lt;Double&gt; getImportesDeEstudios() {
+<span class="fc" id="L45">    return importesDeEstudios;</span>
+  }
+
+  public boolean tienePlanDeSalud() {
+<span class="fc" id="L49">    return tienePlanDeSalud;</span>
+  }
+
+  public boolean tieneObraSocial() {
+<span class="fc" id="L53">    return tieneObraSocial;</span>
+  }
+
+  public int getCantidadDeTurnos() {
+<span class="fc" id="L57">    return cantidadDeTurnos;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L62">    return &quot;SolicitudFacturacion{estudios=&quot;</span>
+        + importesDeEstudios
+        + &quot;, planDeSalud=&quot;
+        + tienePlanDeSalud
+        + &quot;, obraSocial=&quot;
+        + tieneObraSocial
+        + &quot;, turnos=&quot;
+        + cantidadDeTurnos
+        + &quot;}&quot;;
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

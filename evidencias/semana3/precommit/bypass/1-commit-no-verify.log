@@ -1,0 +1,6 @@
+> git commit --no-verify -m 'demo(bypass)...'
+
+[demo/bypass-no-verify 1893cad] demo(bypass): commit que saltea el pre-commit con --no-verify
+ 1 file changed, 6 insertions(+)
+
+> codigo: 0

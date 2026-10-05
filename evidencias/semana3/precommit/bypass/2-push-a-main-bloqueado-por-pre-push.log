@@ -1,0 +1,10 @@
+> git push origin demo/bypass-no-verify:main
+
+########################################################################
+  [RECHAZADO] pre-push: push directo a 'main' no permitido.
+  main solo se actualiza mediante un Pull Request aprobado.
+  Publica tu rama (git push origin <rama>) y abri el PR.
+########################################################################
+error: failed to push some refs to 'https://github.com/IvanDaniliuk01/hospital-tpi.git'
+
+> codigo: 1

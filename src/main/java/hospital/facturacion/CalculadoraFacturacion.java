@@ -3,42 +3,41 @@ package hospital.facturacion;
 /**
  * Calcula el total a facturar por una atención médica.
  *
- * Reemplaza a la clase original {@code Facturacion.calc(...)}. Mantiene
- * exactamente el mismo comportamiento funcional; solo cambia la forma:
- * el método público cuenta la historia (subtotal, descuento, bonificación)
- * y delega cada regla en {@link PoliticaDescuentos}.
+ * <p>Reemplaza a la clase original {@code Facturacion.calc(...)}. Mantiene exactamente el mismo
+ * comportamiento funcional; solo cambia la forma: el método público cuenta la historia (subtotal,
+ * descuento, bonificación) y delega cada regla en {@link PoliticaDescuentos}.
  */
 public class CalculadoraFacturacion {
 
-    private final PoliticaDescuentos politicaDescuentos;
+  private final PoliticaDescuentos politicaDescuentos;
 
-    /** Constructor por defecto: usa la política de descuentos vigente. */
-    public CalculadoraFacturacion() {
-        this(new PoliticaDescuentos());
-    }
+  /** Constructor por defecto: usa la política de descuentos vigente. */
+  public CalculadoraFacturacion() {
+    this(new PoliticaDescuentos());
+  }
 
-    /** Permite inyectar otra política (pruebas, promociones especiales). */
-    public CalculadoraFacturacion(PoliticaDescuentos politicaDescuentos) {
-        if (politicaDescuentos == null) {
-            throw new IllegalArgumentException("La política de descuentos es obligatoria.");
-        }
-        this.politicaDescuentos = politicaDescuentos;
+  /** Permite inyectar otra política (pruebas, promociones especiales). */
+  public CalculadoraFacturacion(PoliticaDescuentos politicaDescuentos) {
+    if (politicaDescuentos == null) {
+      throw new IllegalArgumentException("La política de descuentos es obligatoria.");
     }
+    this.politicaDescuentos = politicaDescuentos;
+  }
 
-    public double calcularTotal(SolicitudFacturacion solicitud) {
-        if (solicitud == null) {
-            throw new IllegalArgumentException("La solicitud de facturación es obligatoria.");
-        }
-        double subtotal = calcularSubtotalDeEstudios(solicitud);
-        double conDescuento = politicaDescuentos.aplicarDescuentoObraSocial(subtotal, solicitud);
-        return politicaDescuentos.aplicarBonificacionPorTurnos(conDescuento, solicitud);
+  public double calcularTotal(SolicitudFacturacion solicitud) {
+    if (solicitud == null) {
+      throw new IllegalArgumentException("La solicitud de facturación es obligatoria.");
     }
+    double subtotal = calcularSubtotalDeEstudios(solicitud);
+    double conDescuento = politicaDescuentos.aplicarDescuentoObraSocial(subtotal, solicitud);
+    return politicaDescuentos.aplicarBonificacionPorTurnos(conDescuento, solicitud);
+  }
 
-    private double calcularSubtotalDeEstudios(SolicitudFacturacion solicitud) {
-        double subtotal = 0;
-        for (double importeEstudio : solicitud.getImportesDeEstudios()) {
-            subtotal += politicaDescuentos.importeACargoDelPaciente(importeEstudio, solicitud);
-        }
-        return subtotal;
+  private double calcularSubtotalDeEstudios(SolicitudFacturacion solicitud) {
+    double subtotal = 0;
+    for (double importeEstudio : solicitud.getImportesDeEstudios()) {
+      subtotal += politicaDescuentos.importeACargoDelPaciente(importeEstudio, solicitud);
     }
+    return subtotal;
+  }
 }

@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,CobroNoProcesadoException,0,9,0,0,0,4,0,2,0,2
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,ComprobanteDeCobro.Estado,0,15,0,0,0,3,0,1,0,1
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,PasarelaNoDisponibleException,0,4,0,0,0,2,0,1,0,1
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,ResultadoPago,0,66,0,10,0,15,0,12,0,7
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,ComprobanteDeCobro,0,60,0,2,0,14,0,9,0,8
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.pagos,ServicioDeCobro,0,82,0,12,0,20,0,10,0,4
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.turnos,Turno,3,47,0,2,1,15,1,5,1,4
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.turnos,CategoriaPaciente,0,56,0,5,0,13,0,8,0,5
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.turnos,Paciente,0,53,0,10,0,12,0,13,0,8
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.turnos,TurnoManager,4,76,0,6,2,21,1,9,1,6
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.facturacion,CalculadoraFacturacion,0,67,0,6,0,17,0,7,0,4
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.facturacion,PoliticaDescuentos,0,31,0,6,0,10,0,7,0,4
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.facturacion,SolicitudFacturacion,11,59,0,6,1,16,1,9,1,6
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.legacy,Facturacion,0,48,0,8,0,12,0,6,0,2
+Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II),hospital.legacy,TurnoManager,0,76,0,16,0,19,0,11,0,3

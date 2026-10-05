@@ -1,0 +1,25 @@
+> mvn -B -ntp pmd:pmd pmd:cpd
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy
+> 2026-10-05T14:21:06
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< ar.edu.utn.hospital:hospital-liquidacion-legacy >-----------
+[INFO] Building Hospital Central - Liquidacion de prestaciones (legacy, auditoria) 2.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- pmd:3.26.0:pmd (default-cli) @ hospital-liquidacion-legacy ---
+[INFO] PMD version: 7.7.0
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] 
+[INFO] --- pmd:3.26.0:cpd (default-cli) @ hospital-liquidacion-legacy ---
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.658 s
+[INFO] Finished at: 2026-10-05T14:21:06-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.7.0" timestamp="2026-10-05T14:21:12.461">
+<file name="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java">
+<violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The class 'ExportadorLiquidaciones' has a NCSS line count of 44 (Highest = 16).
+</violation>
+<violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'ExportadorLiquidaciones' has a total cyclomatic complexity of 11 (highest 4).
+</violation>
+<violation beginline="20" endline="20" begincolumn="19" endcolumn="31" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarJson" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'exportarJson(List&lt;Map&lt;String, Object&gt;&gt;)' has a NCSS line count of 4.
+</violation>
+<violation beginline="20" endline="20" begincolumn="19" endcolumn="31" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarJson" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'exportarJson(List&lt;Map&lt;String, Object&gt;&gt;)' has a cognitive complexity of 1, current threshold is 1
+</violation>
+<violation beginline="20" endline="20" begincolumn="19" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarJson" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'exportarJson(List&lt;Map&lt;String, Object&gt;&gt;)' has a cyclomatic complexity of 2.
+</violation>
+<violation beginline="20" endline="20" begincolumn="19" endcolumn="31" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarJson" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'exportarJson(List&lt;Map&lt;String, Object&gt;&gt;)' has an NPath complexity of 2, current threshold is 1
+</violation>
+<violation beginline="28" endline="28" begincolumn="17" endcolumn="28" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarCsv" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'exportarCsv(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a NCSS line count of 16.
+</violation>
+<violation beginline="28" endline="28" begincolumn="17" endcolumn="28" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarCsv" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'exportarCsv(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cognitive complexity of 4, current threshold is 1
+</violation>
+<violation beginline="28" endline="28" begincolumn="17" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarCsv" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'exportarCsv(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cyclomatic complexity of 4.
+</violation>
+<violation beginline="28" endline="28" begincolumn="17" endcolumn="28" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarCsv" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'exportarCsv(List&lt;Map&lt;String, Object&gt;&gt;, String)' has an NPath complexity of 4, current threshold is 1
+</violation>
+<violation beginline="49" endline="49" begincolumn="17" endcolumn="28" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarTxt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'exportarTxt(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a NCSS line count of 16.
+</violation>
+<violation beginline="49" endline="49" begincolumn="17" endcolumn="28" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarTxt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'exportarTxt(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cognitive complexity of 4, current threshold is 1
+</violation>
+<violation beginline="49" endline="49" begincolumn="17" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarTxt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'exportarTxt(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cyclomatic complexity of 4.
+</violation>
+<violation beginline="49" endline="49" begincolumn="17" endcolumn="28" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="exportarTxt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'exportarTxt(List&lt;Map&lt;String, Object&gt;&gt;, String)' has an NPath complexity of 4, current threshold is 1
+</violation>
+<violation beginline="75" endline="75" begincolumn="19" endcolumn="30" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="comprobante" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'comprobante(String, Map&lt;String, String&gt;)' has a NCSS line count of 5.
+</violation>
+<violation beginline="75" endline="75" begincolumn="19" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="comprobante" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'comprobante(String, Map&lt;String, String&gt;)' has a cyclomatic complexity of 1.
+</violation>
+<violation beginline="75" endline="75" begincolumn="19" endcolumn="30" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="ExportadorLiquidaciones" method="comprobante" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'comprobante(String, Map&lt;String, String&gt;)' has an NPath complexity of 1, current threshold is 1
+</violation>
+</file>
+<file name="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\LiquidadorPrestaciones.java">
+<violation beginline="11" endline="11" begincolumn="8" endcolumn="13" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The class 'LiquidadorPrestaciones' has a NCSS line count of 89 (Highest = 77).
+</violation>
+<violation beginline="11" endline="11" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'LiquidadorPrestaciones' has a total cyclomatic complexity of 35 (highest 33).
+</violation>
+<violation beginline="19" endline="19" begincolumn="19" endcolumn="27" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="liquidar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'liquidar(String, String, String, double, int, boolean, boolean, boolean, String, int)' has a NCSS line count of 77.
+</violation>
+<violation beginline="19" endline="19" begincolumn="19" endcolumn="27" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="liquidar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'liquidar(String, String, String, double, int, boolean, boolean, boolean, String, int)' has a cognitive complexity of 117, current threshold is 1
+</violation>
+<violation beginline="19" endline="19" begincolumn="19" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="liquidar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'liquidar(String, String, String, double, int, boolean, boolean, boolean, String, int)' has a cyclomatic complexity of 33.
+</violation>
+<violation beginline="19" endline="19" begincolumn="19" endcolumn="27" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="liquidar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'liquidar(String, String, String, double, int, boolean, boolean, boolean, String, int)' has an NPath complexity of 142, current threshold is 1
+</violation>
+<violation beginline="112" endline="112" begincolumn="19" endcolumn="26" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="resumen" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'resumen()' has a NCSS line count of 7.
+</violation>
+<violation beginline="112" endline="112" begincolumn="19" endcolumn="26" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="resumen" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'resumen()' has a cognitive complexity of 1, current threshold is 1
+</violation>
+<violation beginline="112" endline="112" begincolumn="19" endcolumn="26" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="resumen" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'resumen()' has a cyclomatic complexity of 2.
+</violation>
+<violation beginline="112" endline="112" begincolumn="19" endcolumn="26" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="LiquidadorPrestaciones" method="resumen" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'resumen()' has an NPath complexity of 2, current threshold is 1
+</violation>
+</file>
+<file name="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java">
+<violation beginline="11" endline="11" begincolumn="8" endcolumn="13" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The class 'ReporteMensualLiquidaciones' has a NCSS line count of 54 (Highest = 53).
+</violation>
+<violation beginline="11" endline="11" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'ReporteMensualLiquidaciones' has a total cyclomatic complexity of 14 (highest 14).
+</violation>
+<violation beginline="13" endline="13" begincolumn="19" endcolumn="26" rule="NcssCount" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" method="generar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#ncsscount" priority="3">
+The method 'generar(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a NCSS line count of 53.
+</violation>
+<violation beginline="13" endline="13" begincolumn="19" endcolumn="26" rule="CognitiveComplexity" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" method="generar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cognitivecomplexity" priority="3">
+The method 'generar(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cognitive complexity of 34, current threshold is 1
+</violation>
+<violation beginline="13" endline="13" begincolumn="19" endcolumn="26" rule="CyclomaticComplexity" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" method="generar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'generar(List&lt;Map&lt;String, Object&gt;&gt;, String)' has a cyclomatic complexity of 14.
+</violation>
+<violation beginline="13" endline="13" begincolumn="19" endcolumn="26" rule="NPathComplexity" ruleset="Design" package="hospital.liquidacion" class="ReporteMensualLiquidaciones" method="generar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.7.0/pmd_rules_java_design.html#npathcomplexity" priority="3">
+The method 'generar(List&lt;Map&lt;String, Object&gt;&gt;, String)' has an NPath complexity of 202, current threshold is 1
+</violation>
+</file>
+</pmd>

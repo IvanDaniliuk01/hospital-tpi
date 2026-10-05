@@ -1,0 +1,7 @@
+* 66336de 2026-10-05 14:34 Ivan Daniliuk docs(calidad): auditoria estatica, Informe de Calidad en Verde y evidencias (#1, refs #2)
+* b3b5796 2026-10-05 14:20 Ivan Daniliuk chore(auditoria): snapshot del modulo heredado de liquidacion, objeto de la auditoria estatica (refs #2)
+* f3100fb 2026-10-05 14:18 Ivan Daniliuk feat(hooks): pre-commit secuencial formatter -> linter -> pruebas, pre-push y DoD v2.0 (#1)
+* 5448ebf 2026-10-05 14:18 Ivan Daniliuk style: aplicar google-java-format con Spotless a main y test (#1)
+* 4ba28c3 2026-10-05 14:18 Ivan Daniliuk build(calidad): Spotless, Checkstyle, PMD/CPD y versions-maven-plugin en el pom (#1)
+* 527d7f3 2026-10-05 14:18 Ivan Daniliuk docs(gobernanza): DoD v1.1, plantillas de Issue/PR y esquema de 25 etiquetas (TP Semana 1)
+* a330cb7 2026-10-05 14:18 Ivan Daniliuk chore: estado inicial v0.2.0 (TP Semana 2 - testing practico y contratos)

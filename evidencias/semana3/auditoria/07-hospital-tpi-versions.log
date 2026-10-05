@@ -1,0 +1,28 @@
+> mvn -B -ntp versions:display-dependency-updates
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi
+> 2026-10-05T14:23:53
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions:2.18.0:display-dependency-updates (default-cli) @ hospital-tpi ---
+[INFO] The following dependencies in Dependencies have newer versions:
+[INFO]   org.junit.jupiter:junit-jupiter ...................... 5.10.2 -> 6.1.3
+[INFO]   org.mockito:mockito-core ............................ 5.11.0 -> 5.24.0
+[INFO]   org.mockito:mockito-junit-jupiter ................... 5.11.0 -> 5.24.0
+[INFO] 
+[INFO] The following dependencies in Plugin Dependencies have newer versions:
+[INFO]   com.puppycrawl.tools:checkstyle .................... 10.21.4 -> 14.3.0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.321 s
+[INFO] Finished at: 2026-10-05T14:23:53-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

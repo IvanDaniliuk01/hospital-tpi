@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ruleset PMD de la DoD (criterio C5) – hospital-tpi, TP Semana 3.
+
+  Prioridades: 1-2 = bloqueante, 3 = mayor (también bloquea: failurePriority=3),
+  4-5 = informativas (se reportan pero no hacen fallar pmd:check).
+  Los umbrales de complejidad son los de la DoD v2.0:
+    ciclomática por método <= 10, cognitiva <= 15, NPath < 200,
+    anidamiento de if <= 3, parámetros <= 5.
+-->
+<ruleset name="DoD hospital-tpi"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+  <description>Reglas de análisis estático que forman parte de la compuerta local.</description>
+
+  <!-- ===== Complejidad (bloqueantes) ===== -->
+  <rule ref="category/java/design.xml/CyclomaticComplexity">
+    <priority>2</priority>
+    <properties>
+      <property name="methodReportLevel" value="11"/>
+      <property name="classReportLevel" value="80"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/CognitiveComplexity">
+    <priority>2</priority>
+    <properties>
+      <property name="reportLevel" value="16"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/NPathComplexity">
+    <priority>2</priority>
+    <properties>
+      <property name="reportLevel" value="200"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+    <priority>2</priority>
+    <properties>
+      <property name="problemDepth" value="4"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/ExcessiveParameterList">
+    <priority>3</priority>
+    <properties>
+      <property name="minimum" value="6"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/NcssCount">
+    <priority>3</priority>
+    <properties>
+      <property name="methodReportLevel" value="40"/>
+      <property name="classReportLevel" value="500"/>
+    </properties>
+  </rule>
+  <rule ref="category/java/design.xml/GodClass">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/design.xml/SimplifyBooleanReturns">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/design.xml/CollapsibleIfStatements">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/design.xml/ImmutableField">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/design.xml/SingularField">
+    <priority>3</priority>
+  </rule>
+
+  <!-- ===== Código muerto y malas prácticas ===== -->
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateField">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/UnusedLocalVariable">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/UnusedFormalParameter">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/AvoidReassigningParameters">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/SystemPrintln">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons">
+    <priority>3</priority>
+  </rule>
+
+  <!-- ===== Errores probables ===== -->
+  <rule ref="category/java/errorprone.xml/EmptyCatchBlock">
+    <priority>1</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/CompareObjectsWithEquals">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/EqualsNull">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/ReturnEmptyCollectionRatherThanNull">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/AssignmentInOperand">
+    <priority>3</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/ImplicitSwitchFallThrough">
+    <priority>2</priority>
+  </rule>
+  <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
+    <priority>3</priority>
+    <properties>
+      <property name="maxDuplicateLiterals" value="4"/>
+    </properties>
+  </rule>
+
+  <!-- ===== Informativas (no bloquean) ===== -->
+  <rule ref="category/java/codestyle.xml/UselessParentheses">
+    <priority>4</priority>
+  </rule>
+  <rule ref="category/java/codestyle.xml/UnnecessaryModifier">
+    <priority>4</priority>
+  </rule>
+</ruleset>

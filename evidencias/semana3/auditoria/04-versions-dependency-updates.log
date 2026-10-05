@@ -1,0 +1,29 @@
+> mvn -B -ntp versions:display-dependency-updates
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy
+> 2026-10-05T14:21:29
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< ar.edu.utn.hospital:hospital-liquidacion-legacy >-----------
+[INFO] Building Hospital Central - Liquidacion de prestaciones (legacy, auditoria) 2.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions:2.18.0:display-dependency-updates (default-cli) @ hospital-liquidacion-legacy ---
+[INFO] The following dependencies in Dependencies have newer versions:
+[INFO]   com.fasterxml.jackson.core:jackson-databind .......... 2.9.8 -> 2.22.3
+[INFO]   commons-collections:commons-collections ............ 3.2.1 -> 20040616
+[INFO]   junit:junit ........................................... 4.12 -> 4.13.2
+[INFO]   org.apache.commons:commons-text ........................ 1.9 -> 1.15.0
+[INFO] 
+[INFO] The following dependencies in Plugin Dependencies have newer versions:
+[INFO]   com.puppycrawl.tools:checkstyle .................... 10.21.4 -> 14.3.0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.268 s
+[INFO] Finished at: 2026-10-05T14:21:29-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

@@ -1,0 +1,89 @@
+> git commit -m 'demo(B-linter)'
+
+========================================================================
+ PRE-COMMIT HOOK - compuerta local de calidad (DoD v2.0)
+ Fecha   : 2026-10-05 14:19:37 -0300
+ Rama    : feature/1-compuerta-calidad-precommit
+ HEAD    : f3100fb
+ Autor   : Ivan Daniliuk <idaniliuk@itba.edu.ar>
+========================================================================
+Archivos en staging:
+   M	src/main/java/hospital/facturacion/CalculadoraFacturacion.java
+System.Management.Automation.RemoteException
+Maven: /c/Users/PCDIM-2008/.m2/apache-maven-3.9.11/bin/mvn
+------------------------------------------------------------------------
+[1/3] Formatter (Spotless + google-java-format)
+      comando: mvn spotless:check
+------------------------------------------------------------------------
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.44.4:check (default-cli) @ hospital-tpi ---
+[INFO] Spotless.Java is keeping 23 files clean - 0 needs changes to be clean, 2 were already clean, 21 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.576 s
+[INFO] Finished at: 2026-10-05T14:19:41-03:00
+[INFO] ------------------------------------------------------------------------
+  [OK] Paso 1/3 - Formatter (Spotless + google-java-format) (4s)
+------------------------------------------------------------------------
+[2/3] Linter (javac -Xlint -Werror, Checkstyle, PMD, CPD)
+      comando: mvn compile checkstyle:check pmd:check pmd:cpd-check
+------------------------------------------------------------------------
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (agente-jacoco) @ hospital-tpi ---
+[INFO] argLine set to "-javaagent:C:\\Users\\PCDIM-2008\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\PCDIM-2008\\Documents\\Claude\\Projects\\UTN - Metodología de sistemas 2\\TP_Semana3\\hospital-tpi\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hospital-tpi ---
+[INFO] skip non existing resourceDirectory C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ hospital-tpi ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (default-cli) @ hospital-tpi ---
+[INFO] Starting audit...
+[ERROR] C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\CalculadoraFacturacion.java:47:5: 'if' construct must use '{}'s. [NeedBraces]
+[ERROR] C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\CalculadoraFacturacion.java:47:35: '1.15' is a magic number. [MagicNumber]
+Audit done.
+[INFO] There are 2 errors reported by Checkstyle 10.21.4 with config/checkstyle/checkstyle-dod.xml ruleset.
+[ERROR] src\main\java\hospital\facturacion\CalculadoraFacturacion.java:[47,5] (blocks) NeedBraces: 'if' construct must use '{}'s.
+[ERROR] src\main\java\hospital\facturacion\CalculadoraFacturacion.java:[47,35] (coding) MagicNumber: '1.15' is a magic number.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.535 s
+[INFO] Finished at: 2026-10-05T14:19:48-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:3.6.0:check (default-cli) on project hospital-tpi: You have 2 Checkstyle violations. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+System.Management.Automation.RemoteException
+########################################################################
+  [FALLA] Paso 2/3 - Linter (javac -Xlint -Werror, Checkstyle, PMD, CPD)  (codigo 1, 7s)
+  COMMIT RECHAZADO por el pre-commit hook. No se creo ningun commit.
+  Los cambios siguen en staging: corregi el problema y repeti git commit.
+  Sugerencia: lee la regla y la linea que informa cada herramienta (checkstyle/PMD/CPD) y corregi el codigo; no desactives la regla.
+  Log completo: .git/precommit-logs/precommit-20261005-141937-1068.log
+########################################################################
+
+> codigo de salida de git commit: 1
+> HEAD antes : f3100fbb6797e847775a76ed1d7c7f2ef1075d17
+> HEAD despues: f3100fbb6797e847775a76ed1d7c7f2ef1075d17
+> commit creado: NO
+> archivos que siguen en staging: src/main/java/hospital/facturacion/CalculadoraFacturacion.java

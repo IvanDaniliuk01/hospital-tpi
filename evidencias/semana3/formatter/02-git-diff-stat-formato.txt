@@ -1,0 +1,24 @@
+ .../facturacion/CalculadoraFacturacion.java        |  55 +-
+ .../hospital/facturacion/PoliticaDescuentos.java   |  48 +-
+ .../hospital/facturacion/ReglasFacturacion.java    |  28 +-
+ .../hospital/facturacion/SolicitudFacturacion.java |  98 ++--
+ .../hospital/pagos/CobroNoProcesadoException.java  |  19 +-
+ .../java/hospital/pagos/ComprobanteDeCobro.java    | 103 ++--
+ src/main/java/hospital/pagos/PasarelaDePagos.java  |  27 +-
+ .../pagos/PasarelaNoDisponibleException.java       |  13 +-
+ src/main/java/hospital/pagos/ResultadoPago.java    |  67 ++-
+ src/main/java/hospital/pagos/ServicioDeCobro.java  |  99 ++--
+ .../java/hospital/turnos/CategoriaPaciente.java    |  57 +-
+ src/main/java/hospital/turnos/Paciente.java        |  65 ++-
+ src/main/java/hospital/turnos/Turno.java           |  83 +--
+ src/main/java/hospital/turnos/TurnoManager.java    |  93 ++--
+ .../facturacion/CalculadoraFacturacionTest.java    | 591 +++++++++++----------
+ .../EquivalenciaOriginalVsRefactorTest.java        |  88 +--
+ .../TurnoManagerLegacyCoberturaDeRamasTest.java    | 227 ++++----
+ .../TurnoManagerLegacyCoberturaIngenuaTest.java    | 104 ++--
+ .../java/hospital/pagos/PasarelaDePagosStub.java   |  54 +-
+ .../java/hospital/pagos/ResultadoPagoTest.java     |  84 ++-
+ .../java/hospital/pagos/ServicioDeCobroTest.java   | 447 ++++++++--------
+ .../hospital/turnos/CategoriaPacienteTest.java     |  85 +--
+ .../java/hospital/turnos/TurnoManagerTest.java     | 268 +++++-----
+ 23 files changed, 1410 insertions(+), 1393 deletions(-)

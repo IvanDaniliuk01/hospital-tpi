@@ -1,0 +1,2 @@
+OSV-Scanner v2.6.0
+https://github.com/google/osv-scanner/releases/download/v2.6.0/osv-scanner_windows_amd64.exe

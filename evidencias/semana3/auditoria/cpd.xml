@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         pmdVersion="7.7.0"
+         timestamp="2026-10-05T14:21:06.1952515-03:00"
+         version="1.0.0"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java"
+         totalNumberOfTokens="570"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\LiquidadorPrestaciones.java"
+         totalNumberOfTokens="622"/>
+   <file path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java"
+         totalNumberOfTokens="476"/>
+   <duplication lines="10" tokens="112">
+      <file begintoken="64"
+            column="28"
+            endcolumn="56"
+            endline="37"
+            endtoken="175"
+            line="28"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java"/>
+      <file begintoken="290"
+            column="28"
+            endcolumn="56"
+            endline="58"
+            endtoken="401"
+            line="49"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java"/>
+      <codefragment><![CDATA[    public void exportarCsv(List<Map<String, Object>> prestaciones, String archivo) {
+        try {
+            FileWriter fw = new FileWriter(archivo);
+            for (Map<String, Object> p : prestaciones) {
+                String os = (String) p.get("os");
+                String plan = (String) p.get("plan");
+                String tipo = (String) p.get("tipo");
+                double imp = (Double) p.get("importe");
+                double r = (Double) p.get("liquidado");
+                fw.write(StringUtils.rightPad(os, 10) + ";");
+]]></codefragment>
+   </duplication>
+   <duplication lines="20" tokens="103">
+      <file begintoken="842"
+            column="25"
+            endcolumn="22"
+            endline="72"
+            endtoken="944"
+            line="53"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\LiquidadorPrestaciones.java"/>
+      <file begintoken="1390"
+            column="43"
+            endcolumn="18"
+            endline="52"
+            endtoken="1492"
+            line="33"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java"/>
+      <codefragment><![CDATA[                    if (plan.equals("SMG02")) {
+                        if (tipo.equals("CONSULTA")) {
+                            r = imp * 0.2;
+                        } else if (tipo.equals("IMAGEN")) {
+                            r = imp * 0.3;
+                            if (ses > 4) {
+                                r = r - (ses - 4) * imp * 0.05;
+                            }
+                        } else {
+                            r = imp * 0.4;
+                        }
+                    } else {
+                        r = imp * 0.5;
+                    }
+                    if (edad > 65) {
+                        r = r * 0.8;
+                    }
+                    if (urg) {
+                        r = r + 1500;
+                    }
+]]></codefragment>
+   </duplication>
+   <duplication lines="12" tokens="67">
+      <file begintoken="689"
+            column="42"
+            endcolumn="27"
+            endline="37"
+            endtoken="755"
+            line="26"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\LiquidadorPrestaciones.java"/>
+      <file begintoken="847"
+            column="44"
+            endcolumn="27"
+            endline="64"
+            endtoken="913"
+            line="53"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\LiquidadorPrestaciones.java"/>
+      <file begintoken="1395"
+            column="62"
+            endcolumn="23"
+            endline="44"
+            endtoken="1461"
+            line="33"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java"/>
+      <codefragment><![CDATA[                    if (plan.equals("210")) {
+                        if (tipo.equals("CONSULTA")) {
+                            r = imp * 0.2;
+                        } else if (tipo.equals("IMAGEN")) {
+                            r = imp * 0.3;
+                            if (ses > 4) {
+                                r = r - (ses - 4) * imp * 0.05;
+                            }
+                        } else {
+                            r = imp * 0.4;
+                        }
+                    } else if (plan.equals("310") || plan.equals("410")) {
+]]></codefragment>
+   </duplication>
+   <duplication lines="6" tokens="62">
+      <file begintoken="89"
+            column="51"
+            endcolumn="55"
+            endline="35"
+            endtoken="150"
+            line="30"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java"/>
+      <file begintoken="1262"
+            column="42"
+            endcolumn="51"
+            endline="27"
+            endtoken="1323"
+            line="22"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java"/>
+      <codefragment><![CDATA[            FileWriter fw = new FileWriter(archivo);
+            for (Map<String, Object> p : prestaciones) {
+                String os = (String) p.get("os");
+                String plan = (String) p.get("plan");
+                String tipo = (String) p.get("tipo");
+                double imp = (Double) p.get("importe");
+]]></codefragment>
+   </duplication>
+   <duplication lines="6" tokens="62">
+      <file begintoken="315"
+            column="51"
+            endcolumn="55"
+            endline="56"
+            endtoken="376"
+            line="51"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ExportadorLiquidaciones.java"/>
+      <file begintoken="1262"
+            column="42"
+            endcolumn="51"
+            endline="27"
+            endtoken="1323"
+            line="22"
+            path="C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\auditoria-legacy\src\main\java\hospital\liquidacion\ReporteMensualLiquidaciones.java"/>
+      <codefragment><![CDATA[            FileWriter fw = new FileWriter(archivo);
+            for (Map<String, Object> p : prestaciones) {
+                String os = (String) p.get("os");
+                String plan = (String) p.get("plan");
+                String tipo = (String) p.get("tipo");
+                double imp = (Double) p.get("importe");
+]]></codefragment>
+   </duplication>
+</pmd-cpd>

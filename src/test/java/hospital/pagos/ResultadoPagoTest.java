@@ -16,47 +16,45 @@ import org.junit.jupiter.params.provider.ValueSource;
 @DisplayName("ResultadoPago (objeto de valor)")
 class ResultadoPagoTest {
 
-    @Test
-    @DisplayName("un pago aprobado lleva código de autorización y no tiene motivo de rechazo")
-    void aprobado_tieneCodigoYNoMotivo() {
-        // Arrange & Act
-        ResultadoPago resultado = ResultadoPago.aprobado("AUT-9");
+  @Test
+  @DisplayName("un pago aprobado lleva código de autorización y no tiene motivo de rechazo")
+  void aprobado_tieneCodigoYNoMotivo() {
+    // Arrange & Act
+    ResultadoPago resultado = ResultadoPago.aprobado("AUT-9");
 
-        // Assert
-        assertAll(
-            () -> assertTrue(resultado.fueAprobado()),
-            () -> assertEquals("AUT-9", resultado.getCodigoAutorizacion()),
-            () -> assertNull(resultado.getMotivoRechazo()),
-            () -> assertEquals("APROBADO(AUT-9)", resultado.toString())
-        );
-    }
+    // Assert
+    assertAll(
+        () -> assertTrue(resultado.fueAprobado()),
+        () -> assertEquals("AUT-9", resultado.getCodigoAutorizacion()),
+        () -> assertNull(resultado.getMotivoRechazo()),
+        () -> assertEquals("APROBADO(AUT-9)", resultado.toString()));
+  }
 
-    @Test
-    @DisplayName("un pago rechazado lleva motivo y no tiene código")
-    void rechazado_tieneMotivoYNoCodigo() {
-        // Arrange & Act
-        ResultadoPago resultado = ResultadoPago.rechazado("sin fondos");
+  @Test
+  @DisplayName("un pago rechazado lleva motivo y no tiene código")
+  void rechazado_tieneMotivoYNoCodigo() {
+    // Arrange & Act
+    ResultadoPago resultado = ResultadoPago.rechazado("sin fondos");
 
-        // Assert
-        assertAll(
-            () -> assertFalse(resultado.fueAprobado()),
-            () -> assertNull(resultado.getCodigoAutorizacion()),
-            () -> assertEquals("sin fondos", resultado.getMotivoRechazo()),
-            () -> assertEquals("RECHAZADO(sin fondos)", resultado.toString())
-        );
-    }
+    // Assert
+    assertAll(
+        () -> assertFalse(resultado.fueAprobado()),
+        () -> assertNull(resultado.getCodigoAutorizacion()),
+        () -> assertEquals("sin fondos", resultado.getMotivoRechazo()),
+        () -> assertEquals("RECHAZADO(sin fondos)", resultado.toString()));
+  }
 
-    @ParameterizedTest(name = "código de autorización inválido: [{0}]")
-    @NullAndEmptySource
-    @ValueSource(strings = {"   "})
-    void aprobadoSinCodigo_seRechaza(String codigoInvalido) {
-        assertThrows(IllegalArgumentException.class, () -> ResultadoPago.aprobado(codigoInvalido));
-    }
+  @ParameterizedTest(name = "código de autorización inválido: [{0}]")
+  @NullAndEmptySource
+  @ValueSource(strings = {"   "})
+  void aprobadoSinCodigo_seRechaza(String codigoInvalido) {
+    assertThrows(IllegalArgumentException.class, () -> ResultadoPago.aprobado(codigoInvalido));
+  }
 
-    @ParameterizedTest(name = "motivo inválido: [{0}]")
-    @NullAndEmptySource
-    @ValueSource(strings = {"   "})
-    void rechazadoSinMotivo_seRechaza(String motivoInvalido) {
-        assertThrows(IllegalArgumentException.class, () -> ResultadoPago.rechazado(motivoInvalido));
-    }
+  @ParameterizedTest(name = "motivo inválido: [{0}]")
+  @NullAndEmptySource
+  @ValueSource(strings = {"   "})
+  void rechazadoSinMotivo_seRechaza(String motivoInvalido) {
+    assertThrows(IllegalArgumentException.class, () -> ResultadoPago.rechazado(motivoInvalido));
+  }
 }
