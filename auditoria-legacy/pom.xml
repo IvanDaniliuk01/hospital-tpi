@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+    Modulo heredado de LIQUIDACION DE PRESTACIONES (snapshot "tal como se recibio").
+    Objeto de la auditoria estatica del TP Semana 3 (Issue #2). NO forma parte
+    del build de hospital-tpi ni de la compuerta del pre-commit: se analiza, no
+    se integra. Las versiones de dependencias son las declaradas originalmente
+    (2019) y NO se actualizan aca a proposito: el reporte debe mostrarlas.
+  -->
+  <groupId>ar.edu.utn.hospital</groupId>
+  <artifactId>hospital-liquidacion-legacy</artifactId>
+  <version>2.3.0</version>
+  <packaging>jar</packaging>
+  <name>Hospital Central - Liquidacion de prestaciones (legacy, auditoria)</name>
+
+  <properties>
+    <maven.compiler.release>8</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <pmd.ruleset>../config/pmd/ruleset-dod.xml</pmd.ruleset>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.9</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.26.0</version>
+        <configuration>
+          <rulesets>
+            <ruleset>${pmd.ruleset}</ruleset>
+          </rulesets>
+          <targetJdk>1.8</targetJdk>
+          <minimumTokens>50</minimumTokens>
+          <failOnViolation>false</failOnViolation>
+          <linkXRef>false</linkXRef>
+          <format>xml</format>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.6.0</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>10.21.4</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>../config/checkstyle/checkstyle-dod.xml</configLocation>
+          <failOnViolation>false</failOnViolation>
+          <failsOnError>false</failsOnError>
+          <consoleOutput>false</consoleOutput>
+          <inputEncoding>UTF-8</inputEncoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.18.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.8.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <!-- mvn -Pmetricas pmd:pmd : reporta la complejidad de TODOS los metodos -->
+      <id>metricas</id>
+      <properties>
+        <pmd.ruleset>../config/pmd/ruleset-metricas.xml</pmd.ruleset>
+      </properties>
+    </profile>
+  </profiles>
+</project>
