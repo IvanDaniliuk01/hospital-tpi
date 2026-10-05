@@ -6,13 +6,15 @@
 
   <groupId>ar.edu.utn.hospital</groupId>
   <artifactId>hospital-tpi</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
   <name>Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II)</name>
   <description>
     Módulos de Turnos (TP1) y Facturación (TP3) del sistema base del TPI, más el
     componente de cobro (TP Semana 2). Incluye la compuerta de calidad local
-    definida en la DoD (TP Semana 1): pruebas en verde y umbrales de cobertura.
+    definida en la DoD (TP Semana 1): pruebas en verde y umbrales de cobertura,
+    y desde el TP Semana 3 el formatter (Spotless + google-java-format) y los
+    linters (Checkstyle, PMD y CPD) que ejecuta el pre-commit hook.
   </description>
 
   <properties>
@@ -24,6 +26,15 @@
     <!-- Umbrales de la DoD v1.0, criterio C3 (TP Semana 1) -->
     <dod.cobertura.lineas>0.80</dod.cobertura.lineas>
     <dod.cobertura.ramas>0.70</dod.cobertura.ramas>
+    <!-- Tooling de calidad (TP Semana 3, DoD v2.0) -->
+    <spotless.version>2.44.4</spotless.version>
+    <google-java-format.version>1.35.0</google-java-format.version>
+    <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
+    <checkstyle.version>10.21.4</checkstyle.version>
+    <pmd-plugin.version>3.26.0</pmd-plugin.version>
+    <versions-plugin.version>2.18.0</versions-plugin.version>
+    <pmd.ruleset>config/pmd/ruleset-dod.xml</pmd.ruleset>
+    <pmd.excluir>**/legacy/**</pmd.excluir>
   </properties>
 
   <dependencies>
@@ -115,6 +126,123 @@
           </execution>
         </executions>
       </plugin>
+      <!-- =============== TP Semana 3: automatización de calidad =============== -->
+
+      <!-- FORMATTER. spotless:check falla si algún archivo no respeta el formato
+           google-java-format; spotless:apply lo corrige. El paquete legacy queda
+           fuera: son los originales de TP1/TP3 que se conservan byte a byte como
+           referencia de las pruebas de equivalencia (deuda inventariada, DoD C5). -->
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+            <excludes>
+              <exclude>src/main/java/hospital/legacy/**</exclude>
+            </excludes>
+            <googleJavaFormat>
+              <version>${google-java-format.version}</version>
+              <style>GOOGLE</style>
+            </googleJavaFormat>
+            <trimTrailingWhitespace/>
+            <endWithNewline/>
+          </java>
+          <lineEndings>UNIX</lineEndings>
+        </configuration>
+        <executions>
+          <execution>
+            <id>formato-dod</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- LINTER 1: Checkstyle con el perfil de la DoD (config/checkstyle).
+           Todas las reglas tienen severity=error: cualquier violación falla. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>config/checkstyle/checkstyle-dod.xml</configLocation>
+          <consoleOutput>true</consoleOutput>
+          <failOnViolation>true</failOnViolation>
+          <violationSeverity>error</violationSeverity>
+          <includeTestSourceDirectory>false</includeTestSourceDirectory>
+          <excludes>hospital/legacy/**</excludes>
+          <inputEncoding>UTF-8</inputEncoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>checkstyle-dod-c5</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- LINTER 2: PMD (complejidad, código muerto, errores probables) y CPD
+           (duplicación). pmd:check falla con prioridad 1 a 3; cpd:check con
+           cualquier bloque duplicado de 50 tokens o más. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${pmd-plugin.version}</version>
+        <configuration>
+          <rulesets>
+            <ruleset>${pmd.ruleset}</ruleset>
+          </rulesets>
+          <targetJdk>17</targetJdk>
+          <failurePriority>3</failurePriority>
+          <printFailingErrors>true</printFailingErrors>
+          <minimumTokens>50</minimumTokens>
+          <includeTests>false</includeTests>
+          <excludes>
+            <exclude>${pmd.excluir}</exclude>
+          </excludes>
+          <linkXRef>false</linkXRef>
+          <analysisCache>true</analysisCache>
+        </configuration>
+        <executions>
+          <execution>
+            <id>pmd-dod-c5</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal><goal>cpd-check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Auditoría de dependencias: mvn versions:display-dependency-updates -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${versions-plugin.version}</version>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <!-- mvn -Pmetricas pmd:pmd : complejidad de TODOS los metodos, incluido el
+           paquete legacy, para comparar original vs. refactor (TP Semana 3). -->
+      <id>metricas</id>
+      <properties>
+        <pmd.ruleset>config/pmd/ruleset-metricas.xml</pmd.ruleset>
+        <pmd.excluir>**/no-excluir-nada/**</pmd.excluir>
+      </properties>
+    </profile>
+  </profiles>
 </project>
