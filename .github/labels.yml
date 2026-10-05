@@ -1,0 +1,27 @@
+# Esquema de etiquetas (TP Semana 1, + dod/bloqueado-c7 en Semana 2). 4 ejes ortogonales, 25 etiquetas.
+# Se crean con scripts/fase2-github.ps1 (gh label create --force). Antes se borran las etiquetas por defecto de GitHub.
+- {name: "tipo/bug",                 color: "d73a4a", description: "Un usuario percibe hoy un comportamiento incorrecto"}
+- {name: "tipo/technical-debt",      color: "fbca04", description: "Funciona, pero cada cambio cuesta mas de lo necesario"}
+- {name: "tipo/feature",             color: "0e8a16", description: "Capacidad nueva para usuarios o para el equipo"}
+- {name: "tipo/documentation",       color: "0075ca", description: "Documentacion, ADR, guias"}
+- {name: "dod/pendiente",            color: "c5def5", description: "Aun no se evaluo contra la DoD"}
+- {name: "dod/en-revision",          color: "bfd4f2", description: "Evidencias presentadas; en revision de pares"}
+- {name: "dod/cumplida",             color: "0e8a16", description: "Todos los criterios C1-C8 con evidencia"}
+- {name: "dod/excepcion-aprobada",   color: "e4e669", description: "Excepcion registrada con fecha limite"}
+- {name: "dod/bloqueado-c1",         color: "b60205", description: "Compilacion con warnings"}
+- {name: "dod/bloqueado-c2",         color: "b60205", description: "Pruebas en rojo o deshabilitadas"}
+- {name: "dod/bloqueado-c3",         color: "b60205", description: "Cobertura bajo umbral"}
+- {name: "dod/bloqueado-c4",         color: "b60205", description: "Falta aprobacion de pares o hay comentarios Altos abiertos"}
+- {name: "dod/bloqueado-c5",         color: "b60205", description: "Formato, Checkstyle, PMD o CPD con violaciones"}
+- {name: "dod/bloqueado-c6",         color: "b60205", description: "Falta Javadoc o ADR"}
+- {name: "dod/bloqueado-c7",         color: "b60205", description: "Pruebas que no cumplen AAA / reglas de dobles"}
+- {name: "prioridad/p0",             color: "b60205", description: "Critica: atender ya"}
+- {name: "prioridad/p1",             color: "d93f0b", description: "Alta: este sprint"}
+- {name: "prioridad/p2",             color: "fbca04", description: "Media: proximo sprint"}
+- {name: "prioridad/p3",             color: "c2e0c6", description: "Baja: cuando haya capacidad"}
+- {name: "estado/triage",            color: "ededed", description: "Recien creada, sin clasificar"}
+- {name: "estado/aceptada",          color: "c5def5", description: "Clasificada y priorizada"}
+- {name: "estado/en-curso",          color: "1d76db", description: "Alguien trabaja en ella"}
+- {name: "estado/bloqueada",         color: "5319e7", description: "Depende de algo externo"}
+- {name: "estado/no-reproducible",   color: "cccccc", description: "No se pudo reproducir"}
+- {name: "estado/descartada",        color: "000000", description: "No se hara"}
