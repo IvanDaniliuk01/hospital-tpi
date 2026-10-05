@@ -1,0 +1,3 @@
+A-formatter: git commit codigo=1, commit creado=NO
+B-linter: git commit codigo=1, commit creado=NO
+C-pruebas: git commit codigo=1, commit creado=NO

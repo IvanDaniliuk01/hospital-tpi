@@ -1,0 +1,35 @@
+> mvn -B -ntp -Pmetricas clean compile pmd:pmd
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi
+> 2026-10-05T14:23:47
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ hospital-tpi ---
+[INFO] Deleting C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\target
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (agente-jacoco) @ hospital-tpi ---
+[INFO] argLine set to "-javaagent:C:\\Users\\PCDIM-2008\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\PCDIM-2008\\Documents\\Claude\\Projects\\UTN - Metodología de sistemas 2\\TP_Semana3\\hospital-tpi\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hospital-tpi ---
+[INFO] skip non existing resourceDirectory C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ hospital-tpi ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- pmd:3.26.0:pmd (default-cli) @ hospital-tpi ---
+[INFO] PMD version: 7.7.0
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.584 s
+[INFO] Finished at: 2026-10-05T14:23:47-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

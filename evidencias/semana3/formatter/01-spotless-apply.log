@@ -1,0 +1,44 @@
+> mvn -B -ntp spotless:apply
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi
+> 2026-10-05T14:18:23
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.44.4:apply (default-cli) @ hospital-tpi ---
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\CalculadoraFacturacion.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\PoliticaDescuentos.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\ReglasFacturacion.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\facturacion\SolicitudFacturacion.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\CobroNoProcesadoException.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ComprobanteDeCobro.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\PasarelaDePagos.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\PasarelaNoDisponibleException.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ResultadoPago.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\pagos\ServicioDeCobro.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\CategoriaPaciente.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\Paciente.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\Turno.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\main\java\hospital\turnos\TurnoManager.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\facturacion\CalculadoraFacturacionTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\facturacion\EquivalenciaOriginalVsRefactorTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\legacy\TurnoManagerLegacyCoberturaDeRamasTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\legacy\TurnoManagerLegacyCoberturaIngenuaTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\pagos\PasarelaDePagosStub.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\pagos\ResultadoPagoTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\pagos\ServicioDeCobroTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\turnos\CategoriaPacienteTest.java
+[INFO] clean file: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi\src\test\java\hospital\turnos\TurnoManagerTest.java
+[INFO] Spotless.Java is keeping 23 files clean - 23 were changed to be clean, 0 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.556 s
+[INFO] Finished at: 2026-10-05T14:18:23-03:00
+[INFO] ------------------------------------------------------------------------
+
+> codigo de salida: 0

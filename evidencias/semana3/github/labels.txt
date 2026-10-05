@@ -1,0 +1,25 @@
+tipo/bug	Un usuario percibe hoy un comportamiento incorrecto	#d73a4a
+tipo/technical-debt	Funciona, pero cada cambio cuesta mas de lo necesario	#fbca04
+tipo/documentation	Documentacion, ADR, guias	#0075ca
+tipo/feature	Capacidad nueva para usuarios o para el equipo	#0e8a16
+dod/pendiente	Aun no se evaluo contra la DoD	#c5def5
+dod/en-revision	Evidencias presentadas; en revision de pares	#bfd4f2
+dod/cumplida	Todos los criterios C1-C8 con evidencia	#0e8a16
+dod/excepcion-aprobada	Excepcion registrada con fecha limite	#e4e669
+dod/bloqueado-c1	Compilacion con warnings	#b60205
+dod/bloqueado-c2	Pruebas en rojo o deshabilitadas	#b60205
+dod/bloqueado-c3	Cobertura bajo umbral	#b60205
+dod/bloqueado-c4	Falta aprobacion de pares o hay comentarios Altos abiertos	#b60205
+dod/bloqueado-c5	Formato, Checkstyle, PMD o CPD con violaciones	#b60205
+dod/bloqueado-c6	Falta Javadoc o ADR	#b60205
+dod/bloqueado-c7	Pruebas que no cumplen AAA / reglas de dobles	#b60205
+prioridad/p0	Critica: atender ya	#b60205
+prioridad/p1	Alta: este sprint	#d93f0b
+prioridad/p2	Media: proximo sprint	#fbca04
+prioridad/p3	Baja: cuando haya capacidad	#c2e0c6
+estado/triage	Recien creada, sin clasificar	#ededed
+estado/aceptada	Clasificada y priorizada	#c5def5
+estado/en-curso	Alguien trabaja en ella	#1d76db
+estado/bloqueada	Depende de algo externo	#5319e7
+estado/descartada	No se hara	#000000
+estado/no-reproducible	No se pudo reproducir	#cccccc

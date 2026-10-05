@@ -1,0 +1,10 @@
+> git push --no-verify origin demo/bypass-no-verify:main
+
+remote: error: GH006: Protected branch update failed for refs/heads/main.        
+remote: 
+remote: - Changes must be made through a pull request.        
+To https://github.com/IvanDaniliuk01/hospital-tpi.git
+ ! [remote rejected] demo/bypass-no-verify -> main (protected branch hook declined)
+error: failed to push some refs to 'https://github.com/IvanDaniliuk01/hospital-tpi.git'
+
+> codigo: 1

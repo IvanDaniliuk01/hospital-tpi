@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Turno.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II)</a> &gt; <a href="index.source.html" class="el_package">hospital.turnos</a> &gt; <span class="el_source">Turno.java</span></div><h1>Turno.java</h1><pre class="source lang-java linenums">package hospital.turnos;
+
+/**
+ * Turno médico asignado a un paciente.
+ *
+ * &lt;p&gt;En el código original el turno era un {@code String} armado por concatenación (Primitive
+ * Obsession). Ahora es un objeto propio y el formato de texto vive en un único método, {@link
+ * #formatear()}.
+ */
+public class Turno {
+
+  private static final String SEPARADOR = &quot;-&quot;;
+  private static final String MARCA_URGENTE = &quot;URGENTE&quot;;
+
+  private final Paciente paciente;
+  private final boolean urgente;
+
+<span class="fc" id="L18">  public Turno(Paciente paciente, boolean urgente) {</span>
+<span class="fc" id="L19">    this.paciente = paciente;</span>
+<span class="fc" id="L20">    this.urgente = urgente;</span>
+<span class="fc" id="L21">  }</span>
+
+  public Paciente getPaciente() {
+<span class="fc" id="L24">    return paciente;</span>
+  }
+
+  public boolean esUrgente() {
+<span class="nc" id="L28">    return urgente;</span>
+  }
+
+  /**
+   * Representación textual del turno, idéntica a la del sistema original: {@code
+   * nombre-edad-obraSocial[-URGENTE]}.
+   */
+  public String formatear() {
+<span class="fc" id="L36">    StringBuilder texto =</span>
+        new StringBuilder()
+<span class="fc" id="L38">            .append(paciente.getNombre())</span>
+<span class="fc" id="L39">            .append(SEPARADOR)</span>
+<span class="fc" id="L40">            .append(paciente.getEdad())</span>
+<span class="fc" id="L41">            .append(SEPARADOR)</span>
+<span class="fc" id="L42">            .append(paciente.getObraSocial());</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    if (urgente) {</span>
+<span class="fc" id="L45">      texto.append(SEPARADOR).append(MARCA_URGENTE);</span>
+    }
+<span class="fc" id="L47">    return texto.toString();</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="fc" id="L52">    return formatear();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

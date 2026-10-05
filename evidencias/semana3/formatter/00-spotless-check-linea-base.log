@@ -1,0 +1,83 @@
+> mvn -B -ntp spotless:check
+> directorio: C:\Users\PCDIM-2008\Documents\Claude\Projects\UTN - Metodología de sistemas 2\TP_Semana3\hospital-tpi
+> 2026-10-05T14:18:15
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< ar.edu.utn.hospital:hospital-tpi >------------------
+[INFO] Building Hospital Central – Turnos y Facturación (TPI Metodología de Sistemas II) 0.3.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.44.4:check (default-cli) @ hospital-tpi ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 23 files clean - 23 needs changes to be clean, 0 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.072 s
+[INFO] Finished at: 2026-10-05T14:18:15-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.diffplug.spotless:spotless-maven-plugin:2.44.4:check (default-cli) on project hospital-tpi: The following files had format violations:
+[ERROR]     src\main\java\hospital\facturacion\CalculadoraFacturacion.java
+[ERROR]         @@ -3,42 +3,41 @@
+[ERROR]          /**
+[ERROR]          ·*·Calcula·el·total·a·facturar·por·una·atención·médica.
+[ERROR]          ·*
+[ERROR]         -·*·Reemplaza·a·la·clase·original·{@code·Facturacion.calc(...)}.·Mantiene
+[ERROR]         -·*·exactamente·el·mismo·comportamiento·funcional;·solo·cambia·la·forma:
+[ERROR]         -·*·el·método·público·cuenta·la·historia·(subtotal,·descuento,·bonificación)
+[ERROR]         -·*·y·delega·cada·regla·en·{@link·PoliticaDescuentos}.
+[ERROR]         +·*·<p>Reemplaza·a·la·clase·original·{@code·Facturacion.calc(...)}.·Mantiene·exactamente·el·mismo
+[ERROR]         +·*·comportamiento·funcional;·solo·cambia·la·forma:·el·método·público·cuenta·la·historia·(subtotal,
+[ERROR]         +·*·descuento,·bonificación)·y·delega·cada·regla·en·{@link·PoliticaDescuentos}.
+[ERROR]          ·*/
+[ERROR]          public·class·CalculadoraFacturacion·{
+[ERROR]          
+[ERROR]         -····private·final·PoliticaDescuentos·politicaDescuentos;
+[ERROR]         +··private·final·PoliticaDescuentos·politicaDescuentos;
+[ERROR]          
+[ERROR]         -····/**·Constructor·por·defecto:·usa·la·política·de·descuentos·vigente.·*/
+[ERROR]         -····public·CalculadoraFacturacion()·{
+[ERROR]         -········this(new·PoliticaDescuentos());
+[ERROR]         -····}
+[ERROR]         +··/**·Constructor·por·defecto:·usa·la·política·de·descuentos·vigente.·*/
+[ERROR]         +··public·CalculadoraFacturacion()·{
+[ERROR]         +····this(new·PoliticaDescuentos());
+[ERROR]         +··}
+[ERROR]          
+[ERROR]         -····/**·Permite·inyectar·otra·política·(pruebas,·promociones·especiales).·*/
+[ERROR]         -····public·CalculadoraFacturacion(PoliticaDescuentos·politicaDescuentos)·{
+[ERROR]         -········if·(politicaDescuentos·==·null)·{
+[ERROR]         -············throw·new·IllegalArgumentException("La·política·de·descuentos·es·obligatoria.");
+[ERROR]         -········}
+[ERROR]         -········this.politicaDescuentos·=·politicaDescuentos;
+[ERROR]         +··/**·Permite·inyectar·otra·política·(pruebas,·promociones·especiales).·*/
+[ERROR]         +··public·CalculadoraFacturacion(PoliticaDescuentos·politicaDescuentos)·{
+[ERROR]         +····if·(politicaDescuentos·==·null)·{
+[ERROR]         +······throw·new·IllegalArgumentException("La·política·de·descuentos·es·obligatoria.");
+[ERROR]          ····}
+[ERROR]         +····this.politicaDescuentos·=·politicaDescuentos;
+[ERROR]         +··}
+[ERROR]          
+[ERROR]         -····public·double·calcularTotal(SolicitudFacturacion·solicitud)·{
+[ERROR]         -········if·(solicitud·==·null)·{
+[ERROR]         -············throw·new·IllegalArgumentException("La·solicitud·de·facturación·es·obligatoria.");
+[ERROR]         -········}
+[ERROR]         -········double·subtotal·=·calcularSubtotalDeEstudios(solicitud);
+[ERROR]         -········double·conDescuento·=·politicaDescuentos.aplicarDescuentoObraSocial(subtotal,·solicitud);
+[ERROR]         -········return·politicaDescuentos.aplicarBonificacionPorTurnos(conDescuento,·solicitud);
+[ERROR]         +··public·double·calcularTotal(SolicitudFacturacion·solicitud)·{
+[ERROR]         +····if·(solicitud·==·null)·{
+[ERROR]     ... (21 more lines that didn't fit)
+[ERROR] Violations also present in 22 other files.
+[ERROR] Run 'mvn spotless:apply' to fix these violations.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+
+> codigo de salida: 1
