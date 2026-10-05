@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# =============================================================================
+#  pre-push  -  Segunda linea de defensa local (DoD v2.0, TP Semana 3)
+#
+#  1) Rechaza cualquier push directo a main: main solo se actualiza por Pull
+#     Request (la misma regla la impone GitHub con la proteccion de rama).
+#  2) Ejecuta la compuerta completa 'mvn verify': formatter, linters, pruebas
+#     y umbrales de cobertura JaCoCo (DoD C3). Cubre tambien los commits que
+#     se hayan creado con 'git commit --no-verify'.
+# =============================================================================
+set -u
+RAIZ="$(git rev-parse --show-toplevel)" || exit 1
+cd "$RAIZ" || exit 1
+
+RAMA_PROTEGIDA="refs/heads/main"
+CERO="0000000000000000000000000000000000000000"
+
+while read -r ref_local sha_local ref_remota sha_remoto; do
+  if [ "$ref_remota" = "$RAMA_PROTEGIDA" ] && [ "$sha_local" != "$CERO" ]; then
+    echo "########################################################################"
+    echo "  [RECHAZADO] pre-push: push directo a 'main' no permitido."
+    echo "  main solo se actualiza mediante un Pull Request aprobado."
+    echo "  Publica tu rama (git push origin <rama>) y abri el PR."
+    echo "########################################################################"
+    exit 1
+  fi
+done
+
+MVN=""
+if [ -n "${MAVEN_CMD:-}" ] && [ -x "$MAVEN_CMD" ]; then MVN="$MAVEN_CMD";
+elif command -v mvn >/dev/null 2>&1; then MVN="$(command -v mvn)";
+else
+  for c in "$HOME"/.m2/apache-maven-*/bin/mvn; do [ -f "$c" ] && MVN="$c" && break; done
+fi
+if [ -z "$MVN" ]; then echo "[FALLA] pre-push: no se encontro Maven."; exit 1; fi
+
+DIR_LOGS="$(git rev-parse --git-dir)/precommit-logs"
+mkdir -p "$DIR_LOGS"
+LOG="$DIR_LOGS/prepush-$(date +%Y%m%d-%H%M%S)-$$.log"
+
+{
+  echo "== PRE-PUSH: compuerta completa (mvn verify) - $(date '+%Y-%m-%d %H:%M:%S %z') =="
+  "$MVN" -B -ntp clean verify
+} 2>&1 | tee "$LOG"
+codigo=${PIPESTATUS[0]}
+if [ "$codigo" -ne 0 ]; then
+  echo "[RECHAZADO] pre-push: 'mvn verify' fallo (codigo $codigo). No se publico nada. Log: $LOG"
+  exit 1
+fi
+echo "[OK] pre-push: compuerta completa en verde. Log: $LOG"
+exit 0

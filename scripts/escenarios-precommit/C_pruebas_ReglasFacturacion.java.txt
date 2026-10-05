@@ -1,0 +1,27 @@
+package hospital.facturacion;
+
+/**
+ * Valores de negocio de la facturación médica.
+ *
+ * <p>Centraliza los "números mágicos" que estaban dispersos en el código original (0.5, 0.9, 3 y
+ * 100) y les da un nombre con significado. Cambiar una regla comercial implica tocar una sola línea
+ * de este archivo.
+ */
+public final class ReglasFacturacion {
+
+  /** Porcentaje del estudio que paga el paciente cuando tiene plan de salud (50 %). */
+  public static final double PROPORCION_A_CARGO_CON_PLAN_DE_SALUD = 0.5;
+
+  /** Factor que se aplica al subtotal cuando el paciente tiene obra social (10 % de descuento). */
+  public static final double FACTOR_DESCUENTO_OBRA_SOCIAL = 0.9;
+
+  /** Cantidad de turnos a partir de la cual (estrictamente mayor) corresponde bonificación. */
+  public static final int TURNOS_MINIMOS_PARA_BONIFICACION = 2;
+
+  /** Importe fijo que se descuenta por fidelidad de turnos. */
+  public static final double BONIFICACION_POR_TURNOS = 100.0;
+
+  private ReglasFacturacion() {
+    // Clase de constantes: no se instancia.
+  }
+}

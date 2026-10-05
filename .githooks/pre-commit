@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# =============================================================================
+#  pre-commit  -  Compuerta local de calidad (DoD v2.0, TP Semana 3)
+#  hospital-tpi / Metodologia de Sistemas II - UTN
+#
+#  Ejecuta EN ORDEN y de forma OBLIGATORIA tres controles sobre el codigo que
+#  se esta por commitear. Si uno falla, los siguientes no se ejecutan, el hook
+#  termina con codigo 1 y Git ABORTA el commit (los cambios quedan en staging).
+#
+#    [1/3] Formatter : Spotless + google-java-format   (mvn spotless:check)
+#    [2/3] Linter    : javac -Xlint -Werror, Checkstyle, PMD y CPD
+#    [3/3] Pruebas   : suite JUnit 5 completa via Surefire (mvn test)
+#
+#  Instalacion (una vez por clon):   git config core.hooksPath .githooks
+#  Cada ejecucion queda registrada en .git/precommit-logs/<fecha>.log
+# =============================================================================
+set -u
+
+RAIZ="$(git rev-parse --show-toplevel)" || exit 1
+cd "$RAIZ" || exit 1
+
+DIR_LOGS="$(git rev-parse --git-dir)/precommit-logs"
+mkdir -p "$DIR_LOGS"
+LOG="$DIR_LOGS/precommit-$(date +%Y%m%d-%H%M%S)-$$.log"
+
+# --- Localizar Maven ----------------------------------------------------------
+buscar_maven() {
+  if [ -n "${MAVEN_CMD:-}" ] && [ -x "$MAVEN_CMD" ]; then echo "$MAVEN_CMD"; return; fi
+  if command -v mvn >/dev/null 2>&1; then command -v mvn; return; fi
+  for candidato in "$HOME"/.m2/apache-maven-*/bin/mvn; do
+    if [ -f "$candidato" ]; then echo "$candidato"; return; fi
+  done
+  echo ""
+}
+
+separador() { echo "------------------------------------------------------------------------"; }
+
+ejecutar_paso() {
+  # $1 = numero, $2 = nombre, $3 = ayuda si falla, resto = argumentos de Maven
+  local numero="$1" nombre="$2" ayuda="$3"
+  shift 3
+  separador
+  echo "[$numero/3] $nombre"
+  echo "      comando: mvn $*"
+  separador
+  local inicio=$SECONDS
+  "$MVN" -B -ntp "$@"
+  local codigo=$?
+  local duracion=$((SECONDS - inicio))
+  if [ $codigo -ne 0 ]; then
+    echo
+    echo "########################################################################"
+    echo "  [FALLA] Paso $numero/3 - $nombre  (codigo $codigo, ${duracion}s)"
+    echo "  COMMIT RECHAZADO por el pre-commit hook. No se creo ningun commit."
+    echo "  Los cambios siguen en staging: corregi el problema y repeti git commit."
+    echo "  Sugerencia: $ayuda"
+    echo "  Log completo: $LOG"
+    echo "########################################################################"
+    return 1
+  fi
+  echo "  [OK] Paso $numero/3 - $nombre (${duracion}s)"
+  return 0
+}
+
+compuerta() {
+  echo "========================================================================"
+  echo " PRE-COMMIT HOOK - compuerta local de calidad (DoD v2.0)"
+  echo " Fecha   : $(date '+%Y-%m-%d %H:%M:%S %z')"
+  echo " Rama    : $(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  echo " HEAD    : $(git rev-parse --short HEAD 2>/dev/null || echo '(primer commit)')"
+  echo " Autor   : $(git config user.name) <$(git config user.email)>"
+  echo "========================================================================"
+  echo "Archivos en staging:"
+  git diff --cached --name-status | sed 's/^/   /'
+
+  if [ -n "$(git diff --name-only -- '*.java' 'pom.xml')" ]; then
+    echo
+    echo "AVISO: hay cambios en .java/pom.xml SIN agregar al commit. Los controles"
+    echo "       se ejecutan sobre el arbol de trabajo: agrega o descarta esos"
+    echo "       cambios para que el resultado corresponda exactamente al commit."
+  fi
+
+  MVN="$(buscar_maven)"
+  if [ -z "$MVN" ]; then
+    echo "[FALLA] No se encontro Maven (mvn). Instalalo o defini MAVEN_CMD."
+    echo "COMMIT RECHAZADO: sin Maven no se puede verificar la DoD."
+    return 1
+  fi
+  echo
+  echo "Maven: $MVN"
+
+  local total_inicio=$SECONDS
+
+  ejecutar_paso 1 "Formatter (Spotless + google-java-format)" \
+    "ejecuta 'mvn spotless:apply', revisa el diff y volve a agregar los archivos." \
+    spotless:check || return 1
+
+  ejecutar_paso 2 "Linter (javac -Xlint -Werror, Checkstyle, PMD, CPD)" \
+    "lee la regla y la linea que informa cada herramienta (checkstyle/PMD/CPD) y corregi el codigo; no desactives la regla." \
+    compile checkstyle:check pmd:check pmd:cpd-check || return 1
+
+  ejecutar_paso 3 "Pruebas unitarias (JUnit 5 via Surefire)" \
+    "revisa target/surefire-reports; si cambio una regla de negocio, primero actualiza la prueba que la especifica." \
+    test || return 1
+
+  separador
+  echo "[OK] Compuerta superada: formatter, linter y pruebas en verde ($((SECONDS - total_inicio))s)."
+  echo "     El commit puede crearse."
+  separador
+  return 0
+}
+
+compuerta 2>&1 | tee "$LOG"
+exit "${PIPESTATUS[0]}"
