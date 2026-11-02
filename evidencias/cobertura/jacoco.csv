@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+JaCoCo Coverage Report,hospital.pagos,FacturaNoCobrableException,0,12,0,0,0,4,0,1,0,1
+JaCoCo Coverage Report,hospital.pagos,ResultadoPago,0,33,0,0,0,9,0,6,0,6
+JaCoCo Coverage Report,hospital.pagos,PasarelaSimulada,0,26,0,4,0,7,0,4,0,2
+JaCoCo Coverage Report,hospital.pagos,EstadoPago,0,21,0,0,0,4,0,1,0,1
+JaCoCo Coverage Report,hospital.pagos,ServicioDeCobro,0,52,0,6,0,15,0,6,0,3
+JaCoCo Coverage Report,hospital.pacientes,RepositorioPacientes,0,43,0,0,0,8,0,3,0,3
+JaCoCo Coverage Report,hospital.pacientes,Cobertura,0,48,0,8,0,12,0,6,0,2
+JaCoCo Coverage Report,hospital.pacientes,Paciente,0,35,0,0,0,12,0,6,0,6
+JaCoCo Coverage Report,hospital.turnos,AgendaTurnos,0,86,1,13,0,22,1,12,0,6
+JaCoCo Coverage Report,hospital.turnos,Turno,0,34,0,2,0,9,0,5,0,4
+JaCoCo Coverage Report,hospital.facturacion,RepositorioEstudios,0,43,0,6,0,10,0,6,0,3
+JaCoCo Coverage Report,hospital.facturacion,RepositorioFacturas,0,50,0,4,0,9,0,6,0,4
+JaCoCo Coverage Report,hospital.facturacion,Factura,3,38,0,0,1,15,1,7,1,7
+JaCoCo Coverage Report,hospital.facturacion,CalculadoraFacturacion,0,44,0,2,0,9,0,3,0,2
+JaCoCo Coverage Report,hospital.facturacion,ServicioFacturacion,0,66,0,4,0,16,0,4,0,2
+JaCoCo Coverage Report,hospital.facturacion,Estudio,0,29,0,2,0,10,0,6,0,5
+JaCoCo Coverage Report,hospital.facturacion,EstadoFactura,0,21,0,0,0,4,0,1,0,1
+JaCoCo Coverage Report,hospital.facturacion,PoliticaDescuentos,0,32,0,6,0,10,0,7,0,4
+JaCoCo Coverage Report,hospital.facturacion,SolicitudFacturacion,0,32,0,2,0,10,0,5,0,4
+JaCoCo Coverage Report,hospital,ConsolaHospital,29,536,6,32,10,136,7,28,1,14

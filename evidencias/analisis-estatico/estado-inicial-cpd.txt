@@ -1,0 +1,28 @@
+Found a 9 line (61 tokens) duplication in the following files: 
+Starting at line 61 of src/main/java/hospital/ConsolaHospital.java
+Starting at line 87 of src/main/java/hospital/ConsolaHospital.java
+
+                    case "2": {
+                        System.out.println("Nro de paciente:");
+                        int np = Integer.parseInt(sc.nextLine().trim());
+                        String[] p = pacientes.get(np);
+                        if (p == null) {
+                            System.out.println("No existe el paciente");
+                            break;
+                        }
+                        System.out.println("Urgente (s/n):");
+
+=====================================================================
+Found a 8 line (55 tokens) duplication in the following files: 
+Starting at line 61 of src/main/java/hospital/ConsolaHospital.java
+Starting at line 101 of src/main/java/hospital/ConsolaHospital.java
+
+                    case "2": {
+                        System.out.println("Nro de paciente:");
+                        int np = Integer.parseInt(sc.nextLine().trim());
+                        String[] p = pacientes.get(np);
+                        if (p == null) {
+                            System.out.println("No existe el paciente");
+                            break;
+                        }
+
