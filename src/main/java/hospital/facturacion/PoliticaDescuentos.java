@@ -5,18 +5,20 @@ import static hospital.facturacion.ReglasFacturacion.FACTOR_DESCUENTO_OBRA_SOCIA
 import static hospital.facturacion.ReglasFacturacion.PROPORCION_A_CARGO_CON_PREPAGA;
 import static hospital.facturacion.ReglasFacturacion.TURNOS_MINIMOS_PARA_BONIFICACION;
 
+import hospital.pacientes.Cobertura;
+
 /** Reglas de descuento de la factura, movidas desde el cálculo (Move Method). */
 public class PoliticaDescuentos {
 
-    public double importeACargoDelPaciente(double importe, boolean tienePlanDeSalud) {
-        if (tienePlanDeSalud) {
+    public double importeACargoDelPaciente(double importe, Cobertura cobertura) {
+        if (cobertura == Cobertura.PREPAGA) {
             return importe * PROPORCION_A_CARGO_CON_PREPAGA;
         }
         return importe;
     }
 
-    public double aplicarDescuentoObraSocial(double total, boolean tieneObraSocial) {
-        if (tieneObraSocial) {
+    public double aplicarDescuentoObraSocial(double total, Cobertura cobertura) {
+        if (cobertura == Cobertura.OBRA_SOCIAL) {
             return total * FACTOR_DESCUENTO_OBRA_SOCIAL;
         }
         return total;

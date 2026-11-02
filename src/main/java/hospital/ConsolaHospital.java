@@ -8,9 +8,13 @@ import hospital.facturacion.PoliticaDescuentos;
 import hospital.facturacion.RepositorioEstudios;
 import hospital.facturacion.RepositorioFacturas;
 import hospital.facturacion.ServicioFacturacion;
+import hospital.pacientes.Cobertura;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
+import hospital.turnos.AgendaTurnos;
 import hospital.turnos.ContadorTurnos;
+import hospital.turnos.Turno;
+import java.util.Optional;
 import java.util.Scanner;
 
 /** Consola del sistema de turnos y facturación del hospital. */
@@ -20,7 +24,7 @@ public class ConsolaHospital {
     private final ContadorTurnos contadorTurnos = new ContadorTurnos();
     private final RepositorioEstudios estudios = new RepositorioEstudios();
     private final RepositorioFacturas facturas = new RepositorioFacturas();
-    private final TurnoManager tm = new TurnoManager();
+    private final AgendaTurnos agenda = new AgendaTurnos();
     private final ServicioFacturacion facturacion = new ServicioFacturacion(
             estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
     private double cobrado = 0;
@@ -99,15 +103,20 @@ public class ConsolaHospital {
         System.out.println("Edad:");
         String edad = sc.nextLine().trim();
         System.out.println("Obra social:");
-        String os = sc.nextLine().trim();
-        Paciente paciente = pacientes.registrar(nombre, edad, os);
-        int nro = paciente.getNumero();
-        if (os.equals("OSDE") || os.equals("SWISS")) {
-            System.out.println("Paciente " + nro + " registrado (prepaga)");
-        } else if (os.equals("PUBLICA")) {
-            System.out.println("Paciente " + nro + " registrado (obra social)");
-        } else {
-            System.out.println("Paciente " + nro + " registrado");
+        String obraSocial = sc.nextLine().trim();
+        Paciente paciente = pacientes.registrar(nombre, edad, obraSocial);
+        System.out.println("Paciente " + paciente.getNumero() + " registrado"
+                + etiquetaDeRegistro(paciente.getCobertura()));
+    }
+
+    private static String etiquetaDeRegistro(Cobertura cobertura) {
+        switch (cobertura) {
+            case PREPAGA:
+                return " (prepaga)";
+            case OBRA_SOCIAL:
+                return " (obra social)";
+            default:
+                return "";
         }
     }
 
@@ -118,12 +127,22 @@ public class ConsolaHospital {
         }
         System.out.println("Urgente (s/n):");
         boolean urgente = sc.nextLine().trim().equals("s");
-        tm.procesar(paciente.getNombre(), paciente.getEdad(), paciente.getObraSocial(), urgente);
+        Optional<Turno> turno = agenda.dar(paciente, urgente);
+        if (turno.isPresent()) {
+            if (paciente.getCobertura() == Cobertura.PREPAGA) {
+                System.out.println("Paciente premium");
+            } else if (paciente.getCobertura() == Cobertura.OBRA_SOCIAL) {
+                System.out.println("Paciente publico");
+            }
+            System.out.println("Turno agregado");
+        }
         contadorTurnos.registrar(paciente.getNombre(), urgente);
     }
 
     private void listarTurnos() {
-        tm.mostrar();
+        for (Turno turno : agenda.todos()) {
+            System.out.println(turno.formatear());
+        }
     }
 
     private void registrarEstudio(Scanner sc) {
@@ -142,17 +161,9 @@ public class ConsolaHospital {
         if (paciente == null) {
             return;
         }
-        boolean plan = false;
-        boolean obra = false;
-        String os = paciente.getObraSocial();
-        if (os.equals("OSDE") || os.equals("SWISS")) {
-            plan = true;
-        }
-        if (os.equals("PUBLICA")) {
-            obra = true;
-        }
         int turnos = contadorTurnos.turnosDe(paciente.getNombre());
-        Factura factura = facturacion.facturarPendientes(paciente.getNumero(), plan, obra, turnos);
+        Factura factura = facturacion.facturarPendientes(
+                paciente.getNumero(), paciente.getCobertura(), turnos);
         System.out.println("Factura " + factura.getNumero() + " para " + paciente.getNombre()
                 + ": " + factura.getCantidadDeEstudios() + " estudios, total $" + factura.getTotal());
     }

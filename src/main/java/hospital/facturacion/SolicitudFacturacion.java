@@ -1,5 +1,6 @@
 package hospital.facturacion;
 
+import hospital.pacientes.Cobertura;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,21 +9,18 @@ import java.util.List;
 public final class SolicitudFacturacion {
 
     private final List<Double> importesDeEstudios;
-    private final boolean tienePlanDeSalud;
-    private final boolean tieneObraSocial;
+    private final Cobertura cobertura;
     private final int cantidadDeTurnos;
 
     public SolicitudFacturacion(
             List<Double> importesDeEstudios,
-            boolean tienePlanDeSalud,
-            boolean tieneObraSocial,
+            Cobertura cobertura,
             int cantidadDeTurnos) {
         if (importesDeEstudios == null) {
             throw new IllegalArgumentException("La lista de importes no puede ser null");
         }
         this.importesDeEstudios = Collections.unmodifiableList(new ArrayList<>(importesDeEstudios));
-        this.tienePlanDeSalud = tienePlanDeSalud;
-        this.tieneObraSocial = tieneObraSocial;
+        this.cobertura = cobertura;
         this.cantidadDeTurnos = cantidadDeTurnos;
     }
 
@@ -30,12 +28,8 @@ public final class SolicitudFacturacion {
         return importesDeEstudios;
     }
 
-    public boolean tienePlanDeSalud() {
-        return tienePlanDeSalud;
-    }
-
-    public boolean tieneObraSocial() {
-        return tieneObraSocial;
+    public Cobertura getCobertura() {
+        return cobertura;
     }
 
     public int getCantidadDeTurnos() {

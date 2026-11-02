@@ -9,9 +9,9 @@ public class RepositorioPacientes {
     private final Map<Integer, Paciente> pacientes = new HashMap<>();
     private int ultimoNumero = 0;
 
-    public Paciente registrar(String nombre, String edadDeclarada, String obraSocial) {
+    public Paciente registrar(String nombre, String edadDeclarada, String obraSocialDeclarada) {
         ultimoNumero++;
-        Paciente paciente = new Paciente(ultimoNumero, nombre, edadDeclarada, obraSocial);
+        Paciente paciente = new Paciente(ultimoNumero, nombre, edadDeclarada, obraSocialDeclarada);
         pacientes.put(ultimoNumero, paciente);
         return paciente;
     }

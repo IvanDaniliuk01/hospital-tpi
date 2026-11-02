@@ -1,5 +1,6 @@
 package hospital.facturacion;
 
+import hospital.pacientes.Cobertura;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +21,14 @@ public class ServicioFacturacion {
     }
 
     public Factura facturarPendientes(
-            int numeroPaciente, boolean tienePlanDeSalud, boolean tieneObraSocial, int cantidadDeTurnos) {
+            int numeroPaciente, Cobertura cobertura, int cantidadDeTurnos) {
         List<Double> importes = new ArrayList<>();
         for (Estudio estudio : estudios.pendientesDe(numeroPaciente)) {
             importes.add(estudio.getImporte());
             estudio.marcarFacturado();
         }
         SolicitudFacturacion solicitud =
-                new SolicitudFacturacion(importes, tienePlanDeSalud, tieneObraSocial, cantidadDeTurnos);
+                new SolicitudFacturacion(importes, cobertura, cantidadDeTurnos);
         double total = calculadora.calcularTotal(solicitud);
         return facturas.emitir(numeroPaciente, importes.size(), total);
     }

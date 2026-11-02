@@ -12,9 +12,9 @@ public class CalculadoraFacturacion {
     public double calcularTotal(SolicitudFacturacion solicitud) {
         double total = 0;
         for (Double importe : solicitud.getImportesDeEstudios()) {
-            total += politica.importeACargoDelPaciente(importe, solicitud.tienePlanDeSalud());
+            total += politica.importeACargoDelPaciente(importe, solicitud.getCobertura());
         }
-        total = politica.aplicarDescuentoObraSocial(total, solicitud.tieneObraSocial());
+        total = politica.aplicarDescuentoObraSocial(total, solicitud.getCobertura());
         return politica.aplicarBonificacionPorFrecuencia(total, solicitud.getCantidadDeTurnos());
     }
 }
