@@ -11,6 +11,10 @@ import hospital.facturacion.ServicioFacturacion;
 import hospital.pacientes.Cobertura;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
+import hospital.pagos.PasarelaDePagos;
+import hospital.pagos.PasarelaSimulada;
+import hospital.pagos.ResultadoPago;
+import hospital.pagos.ServicioDeCobro;
 import hospital.turnos.AgendaTurnos;
 import hospital.turnos.ContadorTurnos;
 import hospital.turnos.Turno;
@@ -27,10 +31,14 @@ public class ConsolaHospital {
     private final AgendaTurnos agenda = new AgendaTurnos();
     private final ServicioFacturacion facturacion = new ServicioFacturacion(
             estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
-    private double cobrado = 0;
+    private final ServicioDeCobro cobros;
+
+    public ConsolaHospital(PasarelaDePagos pasarela) {
+        this.cobros = new ServicioDeCobro(pasarela);
+    }
 
     public static void main(String[] args) {
-        new ConsolaHospital().ejecutar(new Scanner(System.in));
+        new ConsolaHospital(new PasarelaSimulada()).ejecutar(new Scanner(System.in));
     }
 
     public void ejecutar(Scanner sc) {
@@ -172,17 +180,17 @@ public class ConsolaHospital {
         System.out.println("Nro de factura:");
         int nf = Integer.parseInt(sc.nextLine().trim());
         Factura factura = facturas.buscar(nf);
-        // simulacion de la pasarela de pagos
-        long centavos = Math.round(factura.getTotal() * 100);
-        if (centavos % 100 == 99) {
-            System.out.println("Pasarela no disponible, reintente");
-        } else if (factura.getTotal() > 50000) {
-            factura.marcarRechazada();
-            System.out.println("Cobro RECHAZADO factura " + nf);
-        } else {
-            factura.marcarCobrada();
-            cobrado = cobrado + factura.getTotal();
-            System.out.println("Cobro APROBADO factura " + nf + " cod AUT-" + nf);
+        ResultadoPago resultado = cobros.cobrar(factura);
+        switch (resultado.getEstado()) {
+            case NO_DISPONIBLE:
+                System.out.println("Pasarela no disponible, reintente");
+                break;
+            case RECHAZADO:
+                System.out.println("Cobro RECHAZADO factura " + nf);
+                break;
+            default:
+                System.out.println("Cobro APROBADO factura " + nf
+                        + " cod " + resultado.getCodigoAutorizacion());
         }
     }
 
@@ -203,7 +211,7 @@ public class ConsolaHospital {
         System.out.println("Turnos: " + contadorTurnos.total()
                 + " (urgentes: " + contadorTurnos.urgentes() + ")");
         System.out.println("Facturado: $" + facturado);
-        System.out.println("Cobrado: $" + cobrado);
+        System.out.println("Cobrado: $" + cobros.getTotalCobrado());
         System.out.println("Rechazadas: " + rechazadas + " / Pendientes: " + pendientes);
     }
 }
