@@ -9,48 +9,48 @@ import org.junit.jupiter.api.Test;
 
 class ServicioFacturacionTest {
 
-    private static final double DELTA = 1e-9;
+  private static final double DELTA = 1e-9;
 
-    private final RepositorioEstudios estudios = new RepositorioEstudios();
-    private final RepositorioFacturas facturas = new RepositorioFacturas();
-    private final ServicioFacturacion servicio =
-            new ServicioFacturacion(
-                    estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
+  private final RepositorioEstudios estudios = new RepositorioEstudios();
+  private final RepositorioFacturas facturas = new RepositorioFacturas();
+  private final ServicioFacturacion servicio =
+      new ServicioFacturacion(
+          estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
 
-    @Test
-    @DisplayName("Factura solo los estudios pendientes del paciente y los marca facturados")
-    void facturaPendientesDelPaciente() {
-        estudios.registrar(new Estudio(1, 1000.0));
-        estudios.registrar(new Estudio(2, 5000.0));
-        estudios.registrar(new Estudio(1, 2000.0));
+  @Test
+  @DisplayName("Factura solo los estudios pendientes del paciente y los marca facturados")
+  void facturaPendientesDelPaciente() {
+    estudios.registrar(new Estudio(1, 1000.0));
+    estudios.registrar(new Estudio(2, 5000.0));
+    estudios.registrar(new Estudio(1, 2000.0));
 
-        Factura factura = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+    Factura factura = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
 
-        assertEquals(1, factura.getNumero());
-        assertEquals(2, factura.getCantidadDeEstudios());
-        assertEquals(3000.0, factura.getTotal(), DELTA);
-        assertTrue(estudios.pendientesDe(1).isEmpty());
-        assertEquals(1, estudios.pendientesDe(2).size());
-    }
+    assertEquals(1, factura.getNumero());
+    assertEquals(2, factura.getCantidadDeEstudios());
+    assertEquals(3000.0, factura.getTotal(), DELTA);
+    assertTrue(estudios.pendientesDe(1).isEmpty());
+    assertEquals(1, estudios.pendientesDe(2).size());
+  }
 
-    @Test
-    @DisplayName("La factura nueva queda pendiente de cobro y se numera en orden")
-    void facturaNuevaPendiente() {
-        estudios.registrar(new Estudio(1, 1000.0));
-        servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+  @Test
+  @DisplayName("La factura nueva queda pendiente de cobro y se numera en orden")
+  void facturaNuevaPendiente() {
+    estudios.registrar(new Estudio(1, 1000.0));
+    servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
 
-        Factura segunda = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+    Factura segunda = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
 
-        assertEquals(2, segunda.getNumero());
-        assertEquals(EstadoFactura.PENDIENTE_DE_COBRO, segunda.getEstado());
-    }
+    assertEquals(2, segunda.getNumero());
+    assertEquals(EstadoFactura.PENDIENTE_DE_COBRO, segunda.getEstado());
+  }
 
-    @Test
-    @DisplayName("Caracterización D4: facturar sin estudios pendientes emite una factura vacía")
-    void facturarSinEstudiosEmiteFacturaVacia() {
-        Factura factura = servicio.facturarPendientes(1, Cobertura.OBRA_SOCIAL, 4);
+  @Test
+  @DisplayName("Caracterización D4: facturar sin estudios pendientes emite una factura vacía")
+  void facturarSinEstudiosEmiteFacturaVacia() {
+    Factura factura = servicio.facturarPendientes(1, Cobertura.OBRA_SOCIAL, 4);
 
-        assertEquals(0, factura.getCantidadDeEstudios());
-        assertEquals(-100.0, factura.getTotal(), DELTA);
-    }
+    assertEquals(0, factura.getCantidadDeEstudios());
+    assertEquals(-100.0, factura.getTotal(), DELTA);
+  }
 }
