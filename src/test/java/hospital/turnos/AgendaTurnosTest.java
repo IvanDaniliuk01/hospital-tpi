@@ -60,4 +60,41 @@ class AgendaTurnosTest {
 
     assertThrows(NumberFormatException.class, () -> agenda.dar(raro, false));
   }
+
+  @Test
+  @DisplayName("Cuenta turnos por número de paciente, el total y los urgentes")
+  void cuentaTurnos() {
+    Paciente ana = new Paciente(1, "Ana", "34", "OSDE");
+    Paciente beto = new Paciente(2, "Beto", "51", "PUBLICA");
+    agenda.dar(ana, false);
+    agenda.dar(ana, true);
+    agenda.dar(beto, true);
+
+    assertEquals(2, agenda.turnosDe(1));
+    assertEquals(0, agenda.turnosDe(3));
+    assertEquals(3, agenda.total());
+    assertEquals(2, agenda.urgentes());
+  }
+
+  @Test
+  @DisplayName("Dos pacientes con el mismo nombre tienen contadores separados (corrige D2)")
+  void homonimosTienenContadoresSeparados() {
+    Paciente ana = new Paciente(1, "Ana Gomez", "34", "OSDE");
+    Paciente otraAna = new Paciente(6, "Ana Gomez", "60", "PUBLICA");
+    agenda.dar(ana, false);
+    agenda.dar(ana, false);
+    agenda.dar(otraAna, false);
+
+    assertEquals(2, agenda.turnosDe(1));
+    assertEquals(1, agenda.turnosDe(6));
+  }
+
+  @Test
+  @DisplayName("Un turno rechazado no se cuenta (corrige D1)")
+  void turnoRechazadoNoSeCuenta() {
+    agenda.dar(new Paciente(4, "Dario", "0", "PUBLICA"), true);
+
+    assertEquals(0, agenda.total());
+    assertEquals(0, agenda.urgentes());
+  }
 }

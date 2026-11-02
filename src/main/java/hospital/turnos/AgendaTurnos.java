@@ -28,4 +28,29 @@ public class AgendaTurnos {
   public List<Turno> todos() {
     return Collections.unmodifiableList(turnos);
   }
+
+  /** Turnos dados al paciente, identificado por su número (no por su nombre). */
+  public int turnosDe(int numeroPaciente) {
+    int cantidad = 0;
+    for (Turno turno : turnos) {
+      if (turno.getPaciente().getNumero() == numeroPaciente) {
+        cantidad++;
+      }
+    }
+    return cantidad;
+  }
+
+  public int total() {
+    return turnos.size();
+  }
+
+  public int urgentes() {
+    int cantidad = 0;
+    for (Turno turno : turnos) {
+      if (turno.esUrgente()) {
+        cantidad++;
+      }
+    }
+    return cantidad;
+  }
 }

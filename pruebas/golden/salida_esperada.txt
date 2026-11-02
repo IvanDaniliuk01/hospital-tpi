@@ -282,7 +282,7 @@ Estudio registrado para Eva Sosa
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 1 para Ana Gomez: 2 estudios, total $1400.0
+Factura 1 para Ana Gomez: 2 estudios, total $1500.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -293,7 +293,7 @@ Factura 1 para Ana Gomez: 2 estudios, total $1400.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 2 para Ana Gomez: 0 estudios, total $-100.0
+Factura 2 para Ana Gomez: 0 estudios, total $0.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -415,8 +415,8 @@ Error
 0) Salir
 --- REPORTE ---
 Turnos: 6 (urgentes: 2)
-Facturado: $70800.99
-Cobrado: $11700.0
+Facturado: $71000.99
+Cobrado: $12000.0
 Rechazadas: 1 / Pendientes: 1
 === HOSPITAL ===
 1) Registrar paciente

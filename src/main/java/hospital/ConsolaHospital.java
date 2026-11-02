@@ -16,7 +16,6 @@ import hospital.pagos.PasarelaSimulada;
 import hospital.pagos.ResultadoPago;
 import hospital.pagos.ServicioDeCobro;
 import hospital.turnos.AgendaTurnos;
-import hospital.turnos.ContadorTurnos;
 import hospital.turnos.Turno;
 import java.io.PrintStream;
 import java.util.LinkedHashMap;
@@ -30,7 +29,6 @@ public class ConsolaHospital {
   private static final String OPCION_SALIR = "0";
 
   private final RepositorioPacientes pacientes = new RepositorioPacientes();
-  private final ContadorTurnos contadorTurnos = new ContadorTurnos();
   private final RepositorioEstudios estudios = new RepositorioEstudios();
   private final RepositorioFacturas facturas = new RepositorioFacturas();
   private final AgendaTurnos agenda = new AgendaTurnos();
@@ -152,7 +150,6 @@ public class ConsolaHospital {
       salida.println("Paciente publico");
     }
     salida.println("Turno agregado");
-    contadorTurnos.registrar(paciente.getNombre(), urgente);
   }
 
   private void listarTurnos() {
@@ -177,7 +174,7 @@ public class ConsolaHospital {
     if (paciente == null) {
       return;
     }
-    int turnos = contadorTurnos.turnosDe(paciente.getNombre());
+    int turnos = agenda.turnosDe(paciente.getNumero());
     Factura factura =
         facturacion.facturarPendientes(paciente.getNumero(), paciente.getCobertura(), turnos);
     salida.println(
@@ -223,8 +220,7 @@ public class ConsolaHospital {
       }
     }
     salida.println("--- REPORTE ---");
-    salida.println(
-        "Turnos: " + contadorTurnos.total() + " (urgentes: " + contadorTurnos.urgentes() + ")");
+    salida.println("Turnos: " + agenda.total() + " (urgentes: " + agenda.urgentes() + ")");
     salida.println("Facturado: $" + facturado);
     salida.println("Cobrado: $" + cobros.getTotalCobrado());
     salida.println("Rechazadas: " + rechazadas + " / Pendientes: " + pendientes);
