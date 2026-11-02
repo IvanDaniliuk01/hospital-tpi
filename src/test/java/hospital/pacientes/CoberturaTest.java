@@ -28,8 +28,16 @@ class CoberturaTest {
   }
 
   @Test
-  @DisplayName("Caracterización D3: \"osde\" en minúsculas no se reconoce como prepaga")
-  void minusculasNoSeReconocen() {
-    assertEquals(Cobertura.SIN_COBERTURA, Cobertura.desde("osde"));
+  @DisplayName("No distingue mayúsculas ni espacios (corrige D3)")
+  void ignoraMayusculasYEspacios() {
+    assertEquals(Cobertura.PREPAGA, Cobertura.desde("osde"));
+    assertEquals(Cobertura.PREPAGA, Cobertura.desde(" Swiss "));
+    assertEquals(Cobertura.OBRA_SOCIAL, Cobertura.desde("publica"));
+  }
+
+  @Test
+  @DisplayName("null es sin cobertura")
+  void nullEsSinCobertura() {
+    assertEquals(Cobertura.SIN_COBERTURA, Cobertura.desde(null));
   }
 }
