@@ -31,13 +31,9 @@ class GoldenMasterTest {
   }
 
   private static String ejecutarConsola(String guion) {
-    PrintStream salidaOriginal = System.out;
     ByteArrayOutputStream capturada = new ByteArrayOutputStream();
-    try (PrintStream captura = new PrintStream(capturada, true, StandardCharsets.UTF_8)) {
-      System.setOut(captura);
-      new ConsolaHospital(new PasarelaSimulada()).ejecutar(new Scanner(guion));
-    } finally {
-      System.setOut(salidaOriginal);
+    try (PrintStream salida = new PrintStream(capturada, true, StandardCharsets.UTF_8)) {
+      new ConsolaHospital(new PasarelaSimulada(), salida).ejecutar(new Scanner(guion));
     }
     return capturada.toString(StandardCharsets.UTF_8).replace("\r", "");
   }

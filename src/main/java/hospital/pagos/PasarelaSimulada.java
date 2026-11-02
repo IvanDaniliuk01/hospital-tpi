@@ -8,11 +8,12 @@ public class PasarelaSimulada implements PasarelaDePagos {
 
   static final double IMPORTE_MAXIMO_APROBADO = 50000;
   static final long CENTAVOS_QUE_SIMULAN_CAIDA = 99;
+  private static final int CENTAVOS_POR_PESO = 100;
 
   @Override
   public ResultadoPago cobrar(String referencia, double importe) {
-    long centavos = Math.round(importe * 100);
-    if (centavos % 100 == CENTAVOS_QUE_SIMULAN_CAIDA) {
+    long centavos = Math.round(importe * CENTAVOS_POR_PESO);
+    if (centavos % CENTAVOS_POR_PESO == CENTAVOS_QUE_SIMULAN_CAIDA) {
       return ResultadoPago.noDisponible();
     }
     if (importe > IMPORTE_MAXIMO_APROBADO) {
