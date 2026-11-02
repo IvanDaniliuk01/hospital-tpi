@@ -1,0 +1,429 @@
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 1 registrado (prepaga)
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 2 registrado (obra social)
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 3 registrado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 4 registrado (obra social)
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 5 registrado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nombre:
+Edad:
+Obra social:
+Paciente 6 registrado (obra social)
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Paciente premium
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Paciente premium
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Paciente premium
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Paciente publico
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Paciente publico
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+Turno agregado
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Urgente (s/n):
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+No existe el paciente
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Opcion invalida
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Error
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Ana Gomez-34-OSDE
+Ana Gomez-34-OSDE-URGENTE
+Ana Gomez-34-OSDE
+Ana Gomez-60-PUBLICA
+Beto Ruiz-51-PUBLICA-URGENTE
+Carla Diaz-28-osde
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Importe:
+Estudio registrado para Ana Gomez
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Importe:
+Estudio registrado para Ana Gomez
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Importe:
+Estudio registrado para Beto Ruiz
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Importe:
+Estudio registrado para Carla Diaz
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Importe:
+Estudio registrado para Eva Sosa
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Factura 1 para Ana Gomez: 2 estudios, total $1400.0
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Factura 2 para Ana Gomez: 0 estudios, total $-100.0
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Factura 3 para Beto Ruiz: 1 estudios, total $9000.0
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Factura 4 para Eva Sosa: 1 estudios, total $60000.0
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de paciente:
+Factura 5 para Carla Diaz: 1 estudios, total $500.99
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Cobro APROBADO factura 1 cod AUT-1
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Cobro APROBADO factura 1 cod AUT-1
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Cobro APROBADO factura 2 cod AUT-2
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Cobro APROBADO factura 3 cod AUT-3
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Cobro RECHAZADO factura 4
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Pasarela no disponible, reintente
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Nro de factura:
+Error
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+--- REPORTE ---
+Turnos: 7 (urgentes: 2)
+Facturado: $70800.99
+Cobrado: $11700.0
+Rechazadas: 1 / Pendientes: 1
+=== HOSPITAL ===
+1) Registrar paciente
+2) Dar turno
+3) Listar turnos
+4) Registrar estudio
+5) Facturar
+6) Cobrar factura
+7) Reporte
+0) Salir
+Fin
