@@ -24,7 +24,7 @@ class ServicioFacturacionTest {
     estudios.registrar(new Estudio(2, 5000.0));
     estudios.registrar(new Estudio(1, 2000.0));
 
-    Factura factura = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+    Factura factura = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0).orElseThrow();
 
     assertEquals(1, factura.getNumero());
     assertEquals(2, factura.getCantidadDeEstudios());
@@ -38,19 +38,18 @@ class ServicioFacturacionTest {
   void facturaNuevaPendiente() {
     estudios.registrar(new Estudio(1, 1000.0));
     servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+    estudios.registrar(new Estudio(1, 500.0));
 
-    Factura segunda = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0);
+    Factura segunda = servicio.facturarPendientes(1, Cobertura.SIN_COBERTURA, 0).orElseThrow();
 
     assertEquals(2, segunda.getNumero());
     assertEquals(EstadoFactura.PENDIENTE_DE_COBRO, segunda.getEstado());
   }
 
   @Test
-  @DisplayName("Caracterización D4: facturar sin estudios pendientes emite una factura vacía")
-  void facturarSinEstudiosEmiteFacturaVacia() {
-    Factura factura = servicio.facturarPendientes(1, Cobertura.OBRA_SOCIAL, 4);
-
-    assertEquals(0, factura.getCantidadDeEstudios());
-    assertEquals(-100.0, factura.getTotal(), DELTA);
+  @DisplayName("Sin estudios pendientes no se emite factura (corrige D4)")
+  void sinEstudiosNoEmiteFactura() {
+    assertTrue(servicio.facturarPendientes(1, Cobertura.OBRA_SOCIAL, 4).isEmpty());
+    assertTrue(facturas.todas().isEmpty());
   }
 }

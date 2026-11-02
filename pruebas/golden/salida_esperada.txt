@@ -294,7 +294,7 @@ Factura 1 para Ana Gomez: 2 estudios, total $1500.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 2 para Ana Gomez: 0 estudios, total $0.0
+No se emitio factura: Ana Gomez no tiene estudios pendientes
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -305,7 +305,7 @@ Factura 2 para Ana Gomez: 0 estudios, total $0.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 3 para Beto Ruiz: 1 estudios, total $9000.0
+Factura 2 para Beto Ruiz: 1 estudios, total $9000.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -316,7 +316,7 @@ Factura 3 para Beto Ruiz: 1 estudios, total $9000.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 4 para Eva Sosa: 1 estudios, total $60000.0
+Factura 3 para Eva Sosa: 1 estudios, total $60000.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -327,7 +327,7 @@ Factura 4 para Eva Sosa: 1 estudios, total $60000.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 5 para Carla Diaz: 1 estudios, total $250.495
+Factura 4 para Carla Diaz: 1 estudios, total $250.495
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -371,7 +371,7 @@ Cobro APROBADO factura 2 cod AUT-2
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro APROBADO factura 3 cod AUT-3
+Cobro RECHAZADO factura 3
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -382,7 +382,7 @@ Cobro APROBADO factura 3 cod AUT-3
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro RECHAZADO factura 4
+Cobro APROBADO factura 4 cod AUT-4
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -393,7 +393,7 @@ Cobro RECHAZADO factura 4
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro APROBADO factura 5 cod AUT-5
+Error
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno

@@ -55,8 +55,8 @@ class CalculadoraFacturacionTest {
   }
 
   @Test
-  @DisplayName("Caracterización D4: sin estudios y con 4 turnos el total da -100")
-  void sinEstudiosTotalNegativo() {
-    assertEquals(-100.0, total(List.of(), Cobertura.OBRA_SOCIAL, 4), DELTA);
+  @DisplayName("La bonificación no deja el total por debajo de cero (corrige D4)")
+  void bonificacionNoDejaTotalNegativo() {
+    assertEquals(0.0, total(List.of(100.0), Cobertura.PREPAGA, 4), DELTA);
   }
 }

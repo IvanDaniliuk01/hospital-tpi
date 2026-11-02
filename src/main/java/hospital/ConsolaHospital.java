@@ -175,8 +175,14 @@ public class ConsolaHospital {
       return;
     }
     int turnos = agenda.turnosDe(paciente.getNumero());
-    Factura factura =
+    Optional<Factura> emitida =
         facturacion.facturarPendientes(paciente.getNumero(), paciente.getCobertura(), turnos);
+    if (emitida.isEmpty()) {
+      salida.println(
+          "No se emitio factura: " + paciente.getNombre() + " no tiene estudios pendientes");
+      return;
+    }
+    Factura factura = emitida.get();
     salida.println(
         "Factura "
             + factura.getNumero()

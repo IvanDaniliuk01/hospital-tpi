@@ -24,9 +24,10 @@ public class PoliticaDescuentos {
     return total;
   }
 
+  /** Resta la bonificación sin dejar el total por debajo de cero. */
   public double aplicarBonificacionPorFrecuencia(double total, int cantidadDeTurnos) {
     if (cantidadDeTurnos > TURNOS_MINIMOS_PARA_BONIFICACION) {
-      return total - BONIFICACION_POR_FRECUENCIA;
+      return Math.max(0, total - BONIFICACION_POR_FRECUENCIA);
     }
     return total;
   }
