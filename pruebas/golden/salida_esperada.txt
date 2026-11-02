@@ -164,6 +164,7 @@ Turno agregado
 0) Salir
 Nro de paciente:
 Urgente (s/n):
+Turno no agregado: el paciente tiene nombre vacio o edad no valida
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -413,7 +414,7 @@ Error
 7) Reporte
 0) Salir
 --- REPORTE ---
-Turnos: 7 (urgentes: 2)
+Turnos: 6 (urgentes: 2)
 Facturado: $70800.99
 Cobrado: $11700.0
 Rechazadas: 1 / Pendientes: 1

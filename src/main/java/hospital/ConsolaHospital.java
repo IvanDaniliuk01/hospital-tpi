@@ -142,14 +142,16 @@ public class ConsolaHospital {
     salida.println("Urgente (s/n):");
     boolean urgente = "s".equals(sc.nextLine().trim());
     Optional<Turno> turno = agenda.dar(paciente, urgente);
-    if (turno.isPresent()) {
-      if (paciente.getCobertura() == Cobertura.PREPAGA) {
-        salida.println("Paciente premium");
-      } else if (paciente.getCobertura() == Cobertura.OBRA_SOCIAL) {
-        salida.println("Paciente publico");
-      }
-      salida.println("Turno agregado");
+    if (turno.isEmpty()) {
+      salida.println("Turno no agregado: el paciente tiene nombre vacio o edad no valida");
+      return;
     }
+    if (paciente.getCobertura() == Cobertura.PREPAGA) {
+      salida.println("Paciente premium");
+    } else if (paciente.getCobertura() == Cobertura.OBRA_SOCIAL) {
+      salida.println("Paciente publico");
+    }
+    salida.println("Turno agregado");
     contadorTurnos.registrar(paciente.getNombre(), urgente);
   }
 
