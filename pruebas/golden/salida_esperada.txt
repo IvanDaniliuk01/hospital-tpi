@@ -197,7 +197,7 @@ Opcion invalida
 7) Reporte
 0) Salir
 Nro de paciente:
-Error
+Dato invalido: se esperaba un numero
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -393,7 +393,7 @@ Cobro APROBADO factura 4 cod AUT-4
 7) Reporte
 0) Salir
 Nro de factura:
-Error
+No existe la factura 5
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -404,7 +404,7 @@ Error
 7) Reporte
 0) Salir
 Nro de factura:
-Error
+No existe la factura 9
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno

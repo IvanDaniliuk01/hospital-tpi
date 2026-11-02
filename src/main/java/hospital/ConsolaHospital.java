@@ -78,10 +78,12 @@ public class ConsolaHospital {
       }
       try {
         operacion.ejecutar(sc);
+      } catch (NumberFormatException ex) {
+        salida.println("Dato invalido: se esperaba un numero");
       } catch (FacturaNoCobrableException ex) {
         salida.println(ex.getMessage());
       } catch (RuntimeException ex) {
-        salida.println("Error");
+        salida.println("Error inesperado: " + ex);
       }
     }
   }
@@ -200,7 +202,12 @@ public class ConsolaHospital {
   private void cobrarFactura(Scanner sc) {
     salida.println("Nro de factura:");
     int nf = Integer.parseInt(sc.nextLine().trim());
-    Factura factura = facturas.buscar(nf);
+    Optional<Factura> buscada = facturas.buscar(nf);
+    if (buscada.isEmpty()) {
+      salida.println("No existe la factura " + nf);
+      return;
+    }
+    Factura factura = buscada.get();
     ResultadoPago resultado = cobros.cobrar(factura);
     switch (resultado.getEstado()) {
       case NO_DISPONIBLE:
