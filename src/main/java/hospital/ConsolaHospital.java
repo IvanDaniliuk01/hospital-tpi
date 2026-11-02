@@ -1,31 +1,32 @@
 package hospital;
 
+import hospital.facturacion.EstadoFactura;
+import hospital.facturacion.Estudio;
+import hospital.facturacion.Factura;
+import hospital.facturacion.RepositorioEstudios;
+import hospital.facturacion.RepositorioFacturas;
+import hospital.pacientes.Paciente;
+import hospital.pacientes.RepositorioPacientes;
+import hospital.turnos.ContadorTurnos;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-// Consola del sistema de turnos y facturacion del hospital.
-// Version 1.0 - todo junto para salir rapido.
+/** Consola del sistema de turnos y facturación del hospital. */
 public class ConsolaHospital {
 
-    // pacientes: nro -> {nombre, edad, obraSocial}
-    static Map<Integer, String[]> pacientes = new HashMap<>();
-    // turnos por nombre de paciente (para la bonificacion)
-    static Map<String, Integer> turnos = new HashMap<>();
-    static int urgentes = 0;
-    // estudios: {nroPaciente, importe, facturado(0/1)}
-    static List<double[]> estudios = new ArrayList<>();
-    // facturas: {nroPaciente, total, estado(0=pendiente,1=cobrada,2=rechazada)}
-    static List<double[]> facturas = new ArrayList<>();
-    static double cobrado = 0;
-    static int nro = 0;
-
-    static TurnoManager tm = new TurnoManager();
+    private final RepositorioPacientes pacientes = new RepositorioPacientes();
+    private final ContadorTurnos contadorTurnos = new ContadorTurnos();
+    private final RepositorioEstudios estudios = new RepositorioEstudios();
+    private final RepositorioFacturas facturas = new RepositorioFacturas();
+    private final TurnoManager tm = new TurnoManager();
+    private double cobrado = 0;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        new ConsolaHospital().ejecutar(new Scanner(System.in));
+    }
+
+    public void ejecutar(Scanner sc) {
         boolean seguir = true;
         while (seguir && sc.hasNextLine()) {
             mostrarMenu();
@@ -66,7 +67,7 @@ public class ConsolaHospital {
         }
     }
 
-    static void mostrarMenu() {
+    private void mostrarMenu() {
         System.out.println("=== HOSPITAL ===");
         System.out.println("1) Registrar paciente");
         System.out.println("2) Dar turno");
@@ -78,26 +79,26 @@ public class ConsolaHospital {
         System.out.println("0) Salir");
     }
 
-    // Pide el nro de paciente. Devuelve null (y avisa) si no existe.
-    static Integer pedirNroPacienteExistente(Scanner sc) {
+    /** Pide el número de paciente. Devuelve null (y avisa) si no existe. */
+    private Paciente pedirPacienteExistente(Scanner sc) {
         System.out.println("Nro de paciente:");
-        int np = Integer.parseInt(sc.nextLine().trim());
-        if (!pacientes.containsKey(np)) {
+        int numero = Integer.parseInt(sc.nextLine().trim());
+        Paciente paciente = pacientes.buscar(numero);
+        if (paciente == null) {
             System.out.println("No existe el paciente");
-            return null;
         }
-        return np;
+        return paciente;
     }
 
-    static void registrarPaciente(Scanner sc) {
+    private void registrarPaciente(Scanner sc) {
         System.out.println("Nombre:");
-        String n = sc.nextLine().trim();
+        String nombre = sc.nextLine().trim();
         System.out.println("Edad:");
-        String e = sc.nextLine().trim();
+        String edad = sc.nextLine().trim();
         System.out.println("Obra social:");
         String os = sc.nextLine().trim();
-        nro++;
-        pacientes.put(nro, new String[] {n, e, os});
+        Paciente paciente = pacientes.registrar(nombre, edad, os);
+        int nro = paciente.getNumero();
         if (os.equals("OSDE") || os.equals("SWISS")) {
             System.out.println("Paciente " + nro + " registrado (prepaga)");
         } else if (os.equals("PUBLICA")) {
@@ -107,114 +108,96 @@ public class ConsolaHospital {
         }
     }
 
-    static void darTurno(Scanner sc) {
-        Integer np = pedirNroPacienteExistente(sc);
-        if (np == null) {
+    private void darTurno(Scanner sc) {
+        Paciente paciente = pedirPacienteExistente(sc);
+        if (paciente == null) {
             return;
         }
-        String[] p = pacientes.get(np);
         System.out.println("Urgente (s/n):");
-        String u = sc.nextLine().trim();
-        boolean urg = u.equals("s");
-        tm.procesar(p[0], Integer.parseInt(p[1]), p[2], urg);
-        if (turnos.containsKey(p[0])) {
-            turnos.put(p[0], turnos.get(p[0]) + 1);
-        } else {
-            turnos.put(p[0], 1);
-        }
-        if (urg) {
-            urgentes++;
-        }
+        boolean urgente = sc.nextLine().trim().equals("s");
+        tm.procesar(paciente.getNombre(), paciente.getEdad(), paciente.getObraSocial(), urgente);
+        contadorTurnos.registrar(paciente.getNombre(), urgente);
     }
 
-    static void listarTurnos() {
+    private void listarTurnos() {
         tm.mostrar();
     }
 
-    static void registrarEstudio(Scanner sc) {
-        Integer np = pedirNroPacienteExistente(sc);
-        if (np == null) {
+    private void registrarEstudio(Scanner sc) {
+        Paciente paciente = pedirPacienteExistente(sc);
+        if (paciente == null) {
             return;
         }
-        String[] p = pacientes.get(np);
         System.out.println("Importe:");
-        double imp = Double.parseDouble(sc.nextLine().trim());
-        estudios.add(new double[] {np, imp, 0});
-        System.out.println("Estudio registrado para " + p[0]);
+        double importe = Double.parseDouble(sc.nextLine().trim());
+        estudios.registrar(new Estudio(paciente.getNumero(), importe));
+        System.out.println("Estudio registrado para " + paciente.getNombre());
     }
 
-    static void facturar(Scanner sc) {
-        Integer np = pedirNroPacienteExistente(sc);
-        if (np == null) {
+    private void facturar(Scanner sc) {
+        Paciente paciente = pedirPacienteExistente(sc);
+        if (paciente == null) {
             return;
         }
-        String[] p = pacientes.get(np);
+        List<Estudio> pendientes = estudios.pendientesDe(paciente.getNumero());
         List<Double> imps = new ArrayList<>();
-        for (int i = 0; i < estudios.size(); i++) {
-            double[] es = estudios.get(i);
-            if (es[0] == np && es[2] == 0) {
-                imps.add(es[1]);
-                es[2] = 1;
-            }
+        for (Estudio estudio : pendientes) {
+            imps.add(estudio.getImporte());
+            estudio.marcarFacturado();
         }
         boolean plan = false;
         boolean obra = false;
-        if (p[2].equals("OSDE") || p[2].equals("SWISS")) {
+        String os = paciente.getObraSocial();
+        if (os.equals("OSDE") || os.equals("SWISS")) {
             plan = true;
         }
-        if (p[2].equals("PUBLICA")) {
+        if (os.equals("PUBLICA")) {
             obra = true;
         }
-        int t = 0;
-        if (turnos.get(p[0]) != null) {
-            t = turnos.get(p[0]);
-        }
+        int t = contadorTurnos.turnosDe(paciente.getNombre());
         Facturacion f = new Facturacion();
         double total = f.calc(imps, plan, obra, t);
-        facturas.add(new double[] {np, total, 0});
-        System.out.println("Factura " + facturas.size() + " para " + p[0]
+        Factura factura = facturas.emitir(paciente.getNumero(), total);
+        System.out.println("Factura " + factura.getNumero() + " para " + paciente.getNombre()
                 + ": " + imps.size() + " estudios, total $" + total);
     }
 
-    static void cobrarFactura(Scanner sc) {
+    private void cobrarFactura(Scanner sc) {
         System.out.println("Nro de factura:");
         int nf = Integer.parseInt(sc.nextLine().trim());
-        double[] fa = facturas.get(nf - 1);
+        Factura factura = facturas.buscar(nf);
         // simulacion de la pasarela de pagos
-        long centavos = Math.round(fa[1] * 100);
+        long centavos = Math.round(factura.getTotal() * 100);
         if (centavos % 100 == 99) {
             System.out.println("Pasarela no disponible, reintente");
-        } else if (fa[1] > 50000) {
-            fa[2] = 2;
+        } else if (factura.getTotal() > 50000) {
+            factura.marcarRechazada();
             System.out.println("Cobro RECHAZADO factura " + nf);
         } else {
-            fa[2] = 1;
-            cobrado = cobrado + fa[1];
+            factura.marcarCobrada();
+            cobrado = cobrado + factura.getTotal();
             System.out.println("Cobro APROBADO factura " + nf + " cod AUT-" + nf);
         }
     }
 
-    static void emitirReporte() {
-        int tt = 0;
-        for (Integer x : turnos.values()) {
-            tt = tt + x;
-        }
-        double fact = 0;
-        int rech = 0;
-        int pend = 0;
-        for (double[] fa : facturas) {
-            fact = fact + fa[1];
-            if (fa[2] == 2) {
-                rech++;
+    private void emitirReporte() {
+        double facturado = 0;
+        int rechazadas = 0;
+        int pendientes = 0;
+        for (Factura factura : facturas.todas()) {
+            facturado = facturado + factura.getTotal();
+            if (factura.getEstado() == EstadoFactura.RECHAZADA) {
+                rechazadas++;
             }
-            if (fa[2] == 0) {
-                pend++;
+            if (factura.getEstado() == EstadoFactura.PENDIENTE_DE_COBRO) {
+                pendientes++;
             }
         }
         System.out.println("--- REPORTE ---");
-        System.out.println("Turnos: " + tt + " (urgentes: " + urgentes + ")");
-        System.out.println("Facturado: $" + fact);
+        System.out.println("Turnos: " + contadorTurnos.total()
+                + " (urgentes: " + contadorTurnos.urgentes() + ")");
+        System.out.println("Facturado: $" + facturado);
         System.out.println("Cobrado: $" + cobrado);
-        System.out.println("Rechazadas: " + rech + " / Pendientes: " + pend);
+        System.out.println("Rechazadas: " + rechazadas + " / Pendientes: " + pendientes);
     }
 }
