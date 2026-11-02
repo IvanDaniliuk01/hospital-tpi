@@ -349,7 +349,7 @@ Cobro APROBADO factura 1 cod AUT-1
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro APROBADO factura 1 cod AUT-1
+La factura 1 no se puede cobrar porque esta COBRADA
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -417,7 +417,7 @@ Error
 --- REPORTE ---
 Turnos: 6 (urgentes: 2)
 Facturado: $70750.495
-Cobrado: $12250.495
+Cobrado: $10750.495
 Rechazadas: 1 / Pendientes: 0
 === HOSPITAL ===
 1) Registrar paciente

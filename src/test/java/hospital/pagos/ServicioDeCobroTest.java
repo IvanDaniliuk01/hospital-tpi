@@ -1,6 +1,7 @@
 package hospital.pagos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import hospital.facturacion.EstadoFactura;
 import hospital.facturacion.Factura;
@@ -52,16 +53,40 @@ class ServicioDeCobroTest {
   }
 
   @Test
-  @DisplayName("Caracterización D5: una factura cobrada se puede volver a cobrar")
-  void dobleCobro() {
+  @DisplayName("Una factura cobrada no se puede volver a cobrar (corrige D5)")
+  void noPermiteDobleCobro() {
     PasarelaFija pasarela = new PasarelaFija(ResultadoPago.aprobado("AUT-1"));
     ServicioDeCobro servicio = new ServicioDeCobro(pasarela);
     Factura factura = new Factura(1, 1, 2, 1400.0);
-
     servicio.cobrar(factura);
+
+    assertThrows(FacturaNoCobrableException.class, () -> servicio.cobrar(factura));
+    assertEquals(1, pasarela.getLlamadas());
+    assertEquals(1400.0, servicio.getTotalCobrado(), DELTA);
+  }
+
+  @Test
+  @DisplayName("Una factura rechazada no se vuelve a enviar a la pasarela")
+  void noReintentaFacturaRechazada() {
+    PasarelaFija pasarela = new PasarelaFija(ResultadoPago.rechazado());
+    ServicioDeCobro servicio = new ServicioDeCobro(pasarela);
+    Factura factura = new Factura(4, 5, 1, 60000.0);
+    servicio.cobrar(factura);
+
+    assertThrows(FacturaNoCobrableException.class, () -> servicio.cobrar(factura));
+    assertEquals(1, pasarela.getLlamadas());
+  }
+
+  @Test
+  @DisplayName("Si la pasarela no estaba disponible se puede reintentar")
+  void reintentaSiNoEstabaDisponible() {
+    PasarelaFija pasarela = new PasarelaFija(ResultadoPago.noDisponible());
+    ServicioDeCobro servicio = new ServicioDeCobro(pasarela);
+    Factura factura = new Factura(5, 3, 1, 500.99);
+    servicio.cobrar(factura);
+
     servicio.cobrar(factura);
 
     assertEquals(2, pasarela.getLlamadas());
-    assertEquals(2800.0, servicio.getTotalCobrado(), DELTA);
   }
 }

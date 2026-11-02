@@ -11,6 +11,7 @@ import hospital.facturacion.ServicioFacturacion;
 import hospital.pacientes.Cobertura;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
+import hospital.pagos.FacturaNoCobrableException;
 import hospital.pagos.PasarelaDePagos;
 import hospital.pagos.PasarelaSimulada;
 import hospital.pagos.ResultadoPago;
@@ -77,6 +78,8 @@ public class ConsolaHospital {
       }
       try {
         operacion.ejecutar(sc);
+      } catch (FacturaNoCobrableException ex) {
+        salida.println(ex.getMessage());
       } catch (RuntimeException ex) {
         salida.println("Error");
       }
