@@ -9,8 +9,9 @@ public class RepositorioFacturas {
 
     private final List<Factura> facturas = new ArrayList<>();
 
-    public Factura emitir(int numeroPaciente, double total) {
-        Factura factura = new Factura(facturas.size() + 1, numeroPaciente, total);
+    public Factura emitir(int numeroPaciente, int cantidadDeEstudios, double total) {
+        Factura factura =
+                new Factura(facturas.size() + 1, numeroPaciente, cantidadDeEstudios, total);
         facturas.add(factura);
         return factura;
     }

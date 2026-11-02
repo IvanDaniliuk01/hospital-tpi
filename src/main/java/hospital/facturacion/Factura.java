@@ -5,12 +5,14 @@ public class Factura {
 
     private final int numero;
     private final int numeroPaciente;
+    private final int cantidadDeEstudios;
     private final double total;
     private EstadoFactura estado = EstadoFactura.PENDIENTE_DE_COBRO;
 
-    public Factura(int numero, int numeroPaciente, double total) {
+    public Factura(int numero, int numeroPaciente, int cantidadDeEstudios, double total) {
         this.numero = numero;
         this.numeroPaciente = numeroPaciente;
+        this.cantidadDeEstudios = cantidadDeEstudios;
         this.total = total;
     }
 
@@ -20,6 +22,10 @@ public class Factura {
 
     public int getNumeroPaciente() {
         return numeroPaciente;
+    }
+
+    public int getCantidadDeEstudios() {
+        return cantidadDeEstudios;
     }
 
     public double getTotal() {

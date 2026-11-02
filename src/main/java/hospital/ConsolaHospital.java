@@ -4,14 +4,13 @@ import hospital.facturacion.CalculadoraFacturacion;
 import hospital.facturacion.EstadoFactura;
 import hospital.facturacion.Estudio;
 import hospital.facturacion.Factura;
+import hospital.facturacion.PoliticaDescuentos;
 import hospital.facturacion.RepositorioEstudios;
 import hospital.facturacion.RepositorioFacturas;
-import hospital.facturacion.SolicitudFacturacion;
+import hospital.facturacion.ServicioFacturacion;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
 import hospital.turnos.ContadorTurnos;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /** Consola del sistema de turnos y facturación del hospital. */
@@ -22,7 +21,8 @@ public class ConsolaHospital {
     private final RepositorioEstudios estudios = new RepositorioEstudios();
     private final RepositorioFacturas facturas = new RepositorioFacturas();
     private final TurnoManager tm = new TurnoManager();
-    private final CalculadoraFacturacion calculadora = new CalculadoraFacturacion();
+    private final ServicioFacturacion facturacion = new ServicioFacturacion(
+            estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
     private double cobrado = 0;
 
     public static void main(String[] args) {
@@ -142,12 +142,6 @@ public class ConsolaHospital {
         if (paciente == null) {
             return;
         }
-        List<Estudio> pendientes = estudios.pendientesDe(paciente.getNumero());
-        List<Double> imps = new ArrayList<>();
-        for (Estudio estudio : pendientes) {
-            imps.add(estudio.getImporte());
-            estudio.marcarFacturado();
-        }
         boolean plan = false;
         boolean obra = false;
         String os = paciente.getObraSocial();
@@ -157,12 +151,10 @@ public class ConsolaHospital {
         if (os.equals("PUBLICA")) {
             obra = true;
         }
-        int t = contadorTurnos.turnosDe(paciente.getNombre());
-        SolicitudFacturacion solicitud = new SolicitudFacturacion(imps, plan, obra, t);
-        double total = calculadora.calcularTotal(solicitud);
-        Factura factura = facturas.emitir(paciente.getNumero(), total);
+        int turnos = contadorTurnos.turnosDe(paciente.getNombre());
+        Factura factura = facturacion.facturarPendientes(paciente.getNumero(), plan, obra, turnos);
         System.out.println("Factura " + factura.getNumero() + " para " + paciente.getNombre()
-                + ": " + imps.size() + " estudios, total $" + total);
+                + ": " + factura.getCantidadDeEstudios() + " estudios, total $" + factura.getTotal());
     }
 
     private void cobrarFactura(Scanner sc) {
