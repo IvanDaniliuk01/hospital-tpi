@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!--
+  Perfil Checkstyle de la DoD (criterio C5) – hospital-tpi, TP Semana 3.
+
+  Derivado del perfil Google, pero reducido a reglas que el formatter NO
+  resuelve solo: nombres, imports, llaves, bloques vacíos, complejidad y
+  tamaño. El formato (sangría, espacios, saltos de línea) lo controla
+  Spotless + google-java-format, así que no se duplica acá.
+
+  Todas las reglas tienen severity="error": cualquier violación hace fallar
+  checkstyle:check y, por lo tanto, el pre-commit hook.
+-->
+<module name="Checker">
+  <property name="charset" value="UTF-8"/>
+  <property name="severity" value="error"/>
+  <property name="fileExtensions" value="java"/>
+
+  <module name="FileTabCharacter"/>
+  <module name="NewlineAtEndOfFile"/>
+  <module name="LineLength">
+    <property name="max" value="100"/>
+    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://"/>
+  </module>
+
+  <module name="TreeWalker">
+    <!-- Imports -->
+    <module name="AvoidStarImport"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
+    <module name="IllegalImport"/>
+
+    <!-- Convenciones de nombres (Clean Code: nombres que revelan intención) -->
+    <module name="PackageName">
+      <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+    </module>
+    <module name="TypeName"/>
+    <module name="MethodName"/>
+    <module name="MemberName"/>
+    <module name="ParameterName"/>
+    <module name="LocalVariableName"/>
+    <module name="LocalFinalVariableName"/>
+    <module name="ConstantName"/>
+    <module name="StaticVariableName"/>
+
+    <!-- Bloques y llaves -->
+    <module name="NeedBraces"/>
+    <module name="EmptyBlock">
+      <property name="option" value="TEXT"/>
+    </module>
+    <module name="EmptyCatchBlock"/>
+    <module name="AvoidNestedBlocks"/>
+
+    <!-- Errores probables -->
+    <module name="EqualsHashCode"/>
+    <module name="StringLiteralEquality"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="MissingSwitchDefault"/>
+    <module name="FallThrough"/>
+    <module name="InnerAssignment"/>
+    <module name="OneStatementPerLine"/>
+    <module name="MultipleVariableDeclarations"/>
+    <module name="MagicNumber">
+      <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
+      <property name="ignoreFieldDeclaration" value="true"/>
+    </module>
+
+    <!-- Diseño de clases -->
+    <module name="VisibilityModifier"/>
+    <module name="FinalClass"/>
+    <module name="HideUtilityClassConstructor"/>
+    <module name="ModifierOrder"/>
+    <module name="RedundantModifier"/>
+
+    <!-- Complejidad y tamaño (umbrales de la DoD v2.0) -->
+    <module name="CyclomaticComplexity">
+      <property name="max" value="10"/>
+      <property name="switchBlockAsSingleDecisionPoint" value="true"/>
+    </module>
+    <module name="MethodLength">
+      <property name="max" value="40"/>
+      <property name="countEmpty" value="false"/>
+    </module>
+    <module name="ParameterNumber">
+      <property name="max" value="5"/>
+    </module>
+    <module name="NestedIfDepth">
+      <property name="max" value="2"/>
+    </module>
+  </module>
+</module>
