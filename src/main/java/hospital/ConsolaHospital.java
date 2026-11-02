@@ -1,10 +1,12 @@
 package hospital;
 
+import hospital.facturacion.CalculadoraFacturacion;
 import hospital.facturacion.EstadoFactura;
 import hospital.facturacion.Estudio;
 import hospital.facturacion.Factura;
 import hospital.facturacion.RepositorioEstudios;
 import hospital.facturacion.RepositorioFacturas;
+import hospital.facturacion.SolicitudFacturacion;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
 import hospital.turnos.ContadorTurnos;
@@ -20,6 +22,7 @@ public class ConsolaHospital {
     private final RepositorioEstudios estudios = new RepositorioEstudios();
     private final RepositorioFacturas facturas = new RepositorioFacturas();
     private final TurnoManager tm = new TurnoManager();
+    private final CalculadoraFacturacion calculadora = new CalculadoraFacturacion();
     private double cobrado = 0;
 
     public static void main(String[] args) {
@@ -155,8 +158,8 @@ public class ConsolaHospital {
             obra = true;
         }
         int t = contadorTurnos.turnosDe(paciente.getNombre());
-        Facturacion f = new Facturacion();
-        double total = f.calc(imps, plan, obra, t);
+        SolicitudFacturacion solicitud = new SolicitudFacturacion(imps, plan, obra, t);
+        double total = calculadora.calcularTotal(solicitud);
         Factura factura = facturas.emitir(paciente.getNumero(), total);
         System.out.println("Factura " + factura.getNumero() + " para " + paciente.getNombre()
                 + ": " + imps.size() + " estudios, total $" + total);
