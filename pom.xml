@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ar.edu.utn.hospital</groupId>
+  <artifactId>hospital-tpi</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <name>Hospital: consola de Turnos y Facturación (TPI Metodología de Sistemas II)</name>
+  <description>
+    Sistema base del TPI: consola de turnos, facturación y cobro con datos en memoria.
+    La compuerta local de la DoD corre con mvn verify: compilación sin warnings,
+    pruebas (incluido el golden master), cobertura JaCoCo, formato, Checkstyle, PMD y CPD.
+  </description>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.10.2</junit.version>
+    <jacoco.version>0.8.12</jacoco.version>
+    <!-- Umbrales de la DoD v1.0, criterio C3 (TP Semana 1) -->
+    <dod.cobertura.lineas>0.80</dod.cobertura.lineas>
+    <dod.cobertura.ramas>0.70</dod.cobertura.ramas>
+    <!-- Tooling de calidad (TP Semana 3, DoD v2.0) -->
+    <spotless.version>2.44.4</spotless.version>
+    <google-java-format.version>1.35.0</google-java-format.version>
+    <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
+    <checkstyle.version>10.21.4</checkstyle.version>
+    <pmd-plugin.version>3.26.0</pmd-plugin.version>
+    <versions-plugin.version>2.18.0</versions-plugin.version>
+    <pmd.ruleset>config/pmd/ruleset-dod.xml</pmd.ruleset>
+    <pmd.excluir>**/package-info.java</pmd.excluir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <!-- DoD C1: compilación sin warnings -->
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <!-- Permite correr una sola clase con -Dtest=... sin que falle el build -->
+          <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+          <!-- @{argLine} = agente JaCoCo -->
+          <argLine>@{argLine}</argLine>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>agente-jacoco</id>
+            <goals><goal>prepare-agent</goal></goals>
+          </execution>
+          <execution>
+            <id>reporte-jacoco</id>
+            <phase>test</phase>
+            <goals><goal>report</goal></goals>
+          </execution>
+          <execution>
+            <id>compuerta-dod-c3</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>LINE</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${dod.cobertura.lineas}</minimum>
+                    </limit>
+                    <limit>
+                      <counter>BRANCH</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${dod.cobertura.ramas}</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Automatización de calidad (DoD v2.0) -->
+
+      <!-- FORMATTER. spotless:check falla si algún archivo no respeta google-java-format. spotless:apply lo corrige. -->
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+            <googleJavaFormat>
+              <version>${google-java-format.version}</version>
+              <style>GOOGLE</style>
+            </googleJavaFormat>
+            <trimTrailingWhitespace/>
+            <endWithNewline/>
+          </java>
+          <lineEndings>UNIX</lineEndings>
+        </configuration>
+        <executions>
+          <execution>
+            <id>formato-dod</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- LINTER 1: Checkstyle con el perfil de la DoD (config/checkstyle).
+           Todas las reglas tienen severity=error: cualquier violación falla. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>config/checkstyle/checkstyle-dod.xml</configLocation>
+          <consoleOutput>true</consoleOutput>
+          <failOnViolation>true</failOnViolation>
+          <violationSeverity>error</violationSeverity>
+          <includeTestSourceDirectory>false</includeTestSourceDirectory>
+          
+          <inputEncoding>UTF-8</inputEncoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>checkstyle-dod-c5</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- LINTER 2: PMD (complejidad, código muerto, errores probables) y CPD
+           (duplicación). pmd:check falla con prioridad 1 a 3; cpd:check con
+           cualquier bloque duplicado de 50 tokens o más. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${pmd-plugin.version}</version>
+        <configuration>
+          <rulesets>
+            <ruleset>${pmd.ruleset}</ruleset>
+          </rulesets>
+          <targetJdk>17</targetJdk>
+          <failurePriority>3</failurePriority>
+          <printFailingErrors>true</printFailingErrors>
+          <minimumTokens>50</minimumTokens>
+          <includeTests>false</includeTests>
+          <excludes>
+            <exclude>${pmd.excluir}</exclude>
+          </excludes>
+          <linkXRef>false</linkXRef>
+          <analysisCache>true</analysisCache>
+        </configuration>
+        <executions>
+          <execution>
+            <id>pmd-dod-c5</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal><goal>cpd-check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Auditoría de dependencias: mvn versions:display-dependency-updates -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${versions-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

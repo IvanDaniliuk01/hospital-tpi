@@ -1,0 +1,58 @@
+src/main/java/hospital/ConsolaHospital.java:27:	NcssCount:	The method 'main(String[])' has a NCSS line count of 135.
+src/main/java/hospital/ConsolaHospital.java:27:	CognitiveComplexity:	The method 'main(String[])' has a cognitive complexity of 65, current threshold is 16
+src/main/java/hospital/ConsolaHospital.java:27:	CyclomaticComplexity:	The method 'main(String[])' has a cyclomatic complexity of 33.
+src/main/java/hospital/ConsolaHospital.java:31:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:32:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:33:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:34:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:35:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:36:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:37:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:38:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:39:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:44:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:46:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:48:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:52:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:52:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:53:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:54:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:55:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:57:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:62:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:66:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:69:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:71:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:88:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:92:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:95:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:98:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:102:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:106:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:119:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:119:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:122:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/ConsolaHospital.java:132:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:137:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:143:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:146:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:150:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:171:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:172:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:173:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:174:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:175:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:180:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:184:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/ConsolaHospital.java:187:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/TurnoManager.java:8:	ImmutableField:	Field 'turnos' may be declared final
+src/main/java/hospital/TurnoManager.java:17:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/TurnoManager.java:19:	CollapsibleIfStatements:	This if statement could be combined with its parent
+src/main/java/hospital/TurnoManager.java:21:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/TurnoManager.java:22:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/TurnoManager.java:23:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/TurnoManager.java:24:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/TurnoManager.java:25:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+src/main/java/hospital/TurnoManager.java:26:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/TurnoManager.java:39:	SystemPrintln:	Usage of System.out/err
+src/main/java/hospital/TurnoManager.java:47:	SystemPrintln:	Usage of System.out/err

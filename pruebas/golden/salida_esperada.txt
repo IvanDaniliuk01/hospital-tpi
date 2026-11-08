@@ -36,7 +36,7 @@ Paciente 2 registrado (obra social)
 Nombre:
 Edad:
 Obra social:
-Paciente 3 registrado
+Paciente 3 registrado (prepaga)
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -152,6 +152,7 @@ Turno agregado
 0) Salir
 Nro de paciente:
 Urgente (s/n):
+Paciente premium
 Turno agregado
 === HOSPITAL ===
 1) Registrar paciente
@@ -164,6 +165,7 @@ Turno agregado
 0) Salir
 Nro de paciente:
 Urgente (s/n):
+Turno no agregado: el paciente tiene nombre vacio o edad no valida
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -195,7 +197,7 @@ Opcion invalida
 7) Reporte
 0) Salir
 Nro de paciente:
-Error
+Dato invalido: se esperaba un numero
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -281,7 +283,7 @@ Estudio registrado para Eva Sosa
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 1 para Ana Gomez: 2 estudios, total $1400.0
+Factura 1 para Ana Gomez: 2 estudios, total $1500.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -292,7 +294,7 @@ Factura 1 para Ana Gomez: 2 estudios, total $1400.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 2 para Ana Gomez: 0 estudios, total $-100.0
+No se emitio factura: Ana Gomez no tiene estudios pendientes
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -303,7 +305,7 @@ Factura 2 para Ana Gomez: 0 estudios, total $-100.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 3 para Beto Ruiz: 1 estudios, total $9000.0
+Factura 2 para Beto Ruiz: 1 estudios, total $9000.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -314,7 +316,7 @@ Factura 3 para Beto Ruiz: 1 estudios, total $9000.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 4 para Eva Sosa: 1 estudios, total $60000.0
+Factura 3 para Eva Sosa: 1 estudios, total $60000.0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -325,7 +327,7 @@ Factura 4 para Eva Sosa: 1 estudios, total $60000.0
 7) Reporte
 0) Salir
 Nro de paciente:
-Factura 5 para Carla Diaz: 1 estudios, total $500.99
+Factura 4 para Carla Diaz: 1 estudios, total $250.495
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -347,7 +349,7 @@ Cobro APROBADO factura 1 cod AUT-1
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro APROBADO factura 1 cod AUT-1
+La factura 1 no se puede cobrar porque esta COBRADA
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -369,7 +371,7 @@ Cobro APROBADO factura 2 cod AUT-2
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro APROBADO factura 3 cod AUT-3
+Cobro RECHAZADO factura 3
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -380,7 +382,7 @@ Cobro APROBADO factura 3 cod AUT-3
 7) Reporte
 0) Salir
 Nro de factura:
-Cobro RECHAZADO factura 4
+Cobro APROBADO factura 4 cod AUT-4
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -391,7 +393,7 @@ Cobro RECHAZADO factura 4
 7) Reporte
 0) Salir
 Nro de factura:
-Pasarela no disponible, reintente
+No existe la factura 5
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -402,7 +404,7 @@ Pasarela no disponible, reintente
 7) Reporte
 0) Salir
 Nro de factura:
-Error
+No existe la factura 9
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno
@@ -413,10 +415,10 @@ Error
 7) Reporte
 0) Salir
 --- REPORTE ---
-Turnos: 7 (urgentes: 2)
-Facturado: $70800.99
-Cobrado: $11700.0
-Rechazadas: 1 / Pendientes: 1
+Turnos: 6 (urgentes: 2)
+Facturado: $70750.495
+Cobrado: $10750.495
+Rechazadas: 1 / Pendientes: 0
 === HOSPITAL ===
 1) Registrar paciente
 2) Dar turno

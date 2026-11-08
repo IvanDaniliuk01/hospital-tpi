@@ -11,207 +11,234 @@ import hospital.facturacion.ServicioFacturacion;
 import hospital.pacientes.Cobertura;
 import hospital.pacientes.Paciente;
 import hospital.pacientes.RepositorioPacientes;
+import hospital.pagos.FacturaNoCobrableException;
 import hospital.pagos.PasarelaDePagos;
 import hospital.pagos.PasarelaSimulada;
 import hospital.pagos.ResultadoPago;
 import hospital.pagos.ServicioDeCobro;
 import hospital.turnos.AgendaTurnos;
-import hospital.turnos.ContadorTurnos;
 import hospital.turnos.Turno;
+import java.io.PrintStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
 /** Consola del sistema de turnos y facturación del hospital. */
 public class ConsolaHospital {
 
-    private final RepositorioPacientes pacientes = new RepositorioPacientes();
-    private final ContadorTurnos contadorTurnos = new ContadorTurnos();
-    private final RepositorioEstudios estudios = new RepositorioEstudios();
-    private final RepositorioFacturas facturas = new RepositorioFacturas();
-    private final AgendaTurnos agenda = new AgendaTurnos();
-    private final ServicioFacturacion facturacion = new ServicioFacturacion(
-            estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
-    private final ServicioDeCobro cobros;
+  private static final String OPCION_SALIR = "0";
 
-    public ConsolaHospital(PasarelaDePagos pasarela) {
-        this.cobros = new ServicioDeCobro(pasarela);
-    }
+  private final RepositorioPacientes pacientes = new RepositorioPacientes();
+  private final RepositorioEstudios estudios = new RepositorioEstudios();
+  private final RepositorioFacturas facturas = new RepositorioFacturas();
+  private final AgendaTurnos agenda = new AgendaTurnos();
+  private final ServicioFacturacion facturacion =
+      new ServicioFacturacion(
+          estudios, facturas, new CalculadoraFacturacion(new PoliticaDescuentos()));
+  private final ServicioDeCobro cobros;
 
-    public static void main(String[] args) {
-        new ConsolaHospital(new PasarelaSimulada()).ejecutar(new Scanner(System.in));
-    }
+  private final PrintStream salida;
+  private final Map<String, Operacion> operaciones = new LinkedHashMap<>();
 
-    public void ejecutar(Scanner sc) {
-        boolean seguir = true;
-        while (seguir && sc.hasNextLine()) {
-            mostrarMenu();
-            String op = sc.nextLine().trim();
-            try {
-                switch (op) {
-                    case "1":
-                        registrarPaciente(sc);
-                        break;
-                    case "2":
-                        darTurno(sc);
-                        break;
-                    case "3":
-                        listarTurnos();
-                        break;
-                    case "4":
-                        registrarEstudio(sc);
-                        break;
-                    case "5":
-                        facturar(sc);
-                        break;
-                    case "6":
-                        cobrarFactura(sc);
-                        break;
-                    case "7":
-                        emitirReporte();
-                        break;
-                    case "0":
-                        seguir = false;
-                        System.out.println("Fin");
-                        break;
-                    default:
-                        System.out.println("Opcion invalida");
-                }
-            } catch (Exception ex) {
-                System.out.println("Error");
-            }
-        }
-    }
+  /** Una opción del menú. Recibe el scanner para pedir sus propios datos. */
+  @FunctionalInterface
+  private interface Operacion {
+    void ejecutar(Scanner sc);
+  }
 
-    private void mostrarMenu() {
-        System.out.println("=== HOSPITAL ===");
-        System.out.println("1) Registrar paciente");
-        System.out.println("2) Dar turno");
-        System.out.println("3) Listar turnos");
-        System.out.println("4) Registrar estudio");
-        System.out.println("5) Facturar");
-        System.out.println("6) Cobrar factura");
-        System.out.println("7) Reporte");
-        System.out.println("0) Salir");
-    }
+  public ConsolaHospital(PasarelaDePagos pasarela, PrintStream salida) {
+    this.cobros = new ServicioDeCobro(pasarela);
+    this.salida = salida;
+    operaciones.put("1", this::registrarPaciente);
+    operaciones.put("2", this::darTurno);
+    operaciones.put("3", sc -> listarTurnos());
+    operaciones.put("4", this::registrarEstudio);
+    operaciones.put("5", this::facturar);
+    operaciones.put("6", this::cobrarFactura);
+    operaciones.put("7", sc -> emitirReporte());
+  }
 
-    /** Pide el número de paciente. Devuelve null (y avisa) si no existe. */
-    private Paciente pedirPacienteExistente(Scanner sc) {
-        System.out.println("Nro de paciente:");
-        int numero = Integer.parseInt(sc.nextLine().trim());
-        Paciente paciente = pacientes.buscar(numero);
-        if (paciente == null) {
-            System.out.println("No existe el paciente");
-        }
-        return paciente;
-    }
+  public static void main(String[] args) {
+    new ConsolaHospital(new PasarelaSimulada(), System.out).ejecutar(new Scanner(System.in));
+  }
 
-    private void registrarPaciente(Scanner sc) {
-        System.out.println("Nombre:");
-        String nombre = sc.nextLine().trim();
-        System.out.println("Edad:");
-        String edad = sc.nextLine().trim();
-        System.out.println("Obra social:");
-        String obraSocial = sc.nextLine().trim();
-        Paciente paciente = pacientes.registrar(nombre, edad, obraSocial);
-        System.out.println("Paciente " + paciente.getNumero() + " registrado"
-                + etiquetaDeRegistro(paciente.getCobertura()));
+  public void ejecutar(Scanner sc) {
+    while (sc.hasNextLine()) {
+      mostrarMenu();
+      String opcion = sc.nextLine().trim();
+      if (OPCION_SALIR.equals(opcion)) {
+        salida.println("Fin");
+        return;
+      }
+      Operacion operacion = operaciones.get(opcion);
+      if (operacion == null) {
+        salida.println("Opcion invalida");
+        continue;
+      }
+      try {
+        operacion.ejecutar(sc);
+      } catch (NumberFormatException ex) {
+        salida.println("Dato invalido: se esperaba un numero");
+      } catch (FacturaNoCobrableException ex) {
+        salida.println(ex.getMessage());
+      } catch (RuntimeException ex) {
+        salida.println("Error inesperado: " + ex);
+      }
     }
+  }
 
-    private static String etiquetaDeRegistro(Cobertura cobertura) {
-        switch (cobertura) {
-            case PREPAGA:
-                return " (prepaga)";
-            case OBRA_SOCIAL:
-                return " (obra social)";
-            default:
-                return "";
-        }
-    }
+  private void mostrarMenu() {
+    salida.println("=== HOSPITAL ===");
+    salida.println("1) Registrar paciente");
+    salida.println("2) Dar turno");
+    salida.println("3) Listar turnos");
+    salida.println("4) Registrar estudio");
+    salida.println("5) Facturar");
+    salida.println("6) Cobrar factura");
+    salida.println("7) Reporte");
+    salida.println("0) Salir");
+  }
 
-    private void darTurno(Scanner sc) {
-        Paciente paciente = pedirPacienteExistente(sc);
-        if (paciente == null) {
-            return;
-        }
-        System.out.println("Urgente (s/n):");
-        boolean urgente = sc.nextLine().trim().equals("s");
-        Optional<Turno> turno = agenda.dar(paciente, urgente);
-        if (turno.isPresent()) {
-            if (paciente.getCobertura() == Cobertura.PREPAGA) {
-                System.out.println("Paciente premium");
-            } else if (paciente.getCobertura() == Cobertura.OBRA_SOCIAL) {
-                System.out.println("Paciente publico");
-            }
-            System.out.println("Turno agregado");
-        }
-        contadorTurnos.registrar(paciente.getNombre(), urgente);
+  /** Pide el número de paciente. Devuelve null (y avisa) si no existe. */
+  private Paciente pedirPacienteExistente(Scanner sc) {
+    salida.println("Nro de paciente:");
+    int numero = Integer.parseInt(sc.nextLine().trim());
+    Paciente paciente = pacientes.buscar(numero);
+    if (paciente == null) {
+      salida.println("No existe el paciente");
     }
+    return paciente;
+  }
 
-    private void listarTurnos() {
-        for (Turno turno : agenda.todos()) {
-            System.out.println(turno.formatear());
-        }
-    }
+  private void registrarPaciente(Scanner sc) {
+    salida.println("Nombre:");
+    String nombre = sc.nextLine().trim();
+    salida.println("Edad:");
+    String edad = sc.nextLine().trim();
+    salida.println("Obra social:");
+    String obraSocial = sc.nextLine().trim();
+    Paciente paciente = pacientes.registrar(nombre, edad, obraSocial);
+    salida.println(
+        "Paciente "
+            + paciente.getNumero()
+            + " registrado"
+            + etiquetaDeRegistro(paciente.getCobertura()));
+  }
 
-    private void registrarEstudio(Scanner sc) {
-        Paciente paciente = pedirPacienteExistente(sc);
-        if (paciente == null) {
-            return;
-        }
-        System.out.println("Importe:");
-        double importe = Double.parseDouble(sc.nextLine().trim());
-        estudios.registrar(new Estudio(paciente.getNumero(), importe));
-        System.out.println("Estudio registrado para " + paciente.getNombre());
+  private static String etiquetaDeRegistro(Cobertura cobertura) {
+    switch (cobertura) {
+      case PREPAGA:
+        return " (prepaga)";
+      case OBRA_SOCIAL:
+        return " (obra social)";
+      default:
+        return "";
     }
+  }
 
-    private void facturar(Scanner sc) {
-        Paciente paciente = pedirPacienteExistente(sc);
-        if (paciente == null) {
-            return;
-        }
-        int turnos = contadorTurnos.turnosDe(paciente.getNombre());
-        Factura factura = facturacion.facturarPendientes(
-                paciente.getNumero(), paciente.getCobertura(), turnos);
-        System.out.println("Factura " + factura.getNumero() + " para " + paciente.getNombre()
-                + ": " + factura.getCantidadDeEstudios() + " estudios, total $" + factura.getTotal());
+  private void darTurno(Scanner sc) {
+    Paciente paciente = pedirPacienteExistente(sc);
+    if (paciente == null) {
+      return;
     }
+    salida.println("Urgente (s/n):");
+    boolean urgente = "s".equals(sc.nextLine().trim());
+    Optional<Turno> turno = agenda.dar(paciente, urgente);
+    if (turno.isEmpty()) {
+      salida.println("Turno no agregado: el paciente tiene nombre vacio o edad no valida");
+      return;
+    }
+    if (paciente.getCobertura() == Cobertura.PREPAGA) {
+      salida.println("Paciente premium");
+    } else if (paciente.getCobertura() == Cobertura.OBRA_SOCIAL) {
+      salida.println("Paciente publico");
+    }
+    salida.println("Turno agregado");
+  }
 
-    private void cobrarFactura(Scanner sc) {
-        System.out.println("Nro de factura:");
-        int nf = Integer.parseInt(sc.nextLine().trim());
-        Factura factura = facturas.buscar(nf);
-        ResultadoPago resultado = cobros.cobrar(factura);
-        switch (resultado.getEstado()) {
-            case NO_DISPONIBLE:
-                System.out.println("Pasarela no disponible, reintente");
-                break;
-            case RECHAZADO:
-                System.out.println("Cobro RECHAZADO factura " + nf);
-                break;
-            default:
-                System.out.println("Cobro APROBADO factura " + nf
-                        + " cod " + resultado.getCodigoAutorizacion());
-        }
+  private void listarTurnos() {
+    for (Turno turno : agenda.todos()) {
+      salida.println(turno.formatear());
     }
+  }
 
-    private void emitirReporte() {
-        double facturado = 0;
-        int rechazadas = 0;
-        int pendientes = 0;
-        for (Factura factura : facturas.todas()) {
-            facturado = facturado + factura.getTotal();
-            if (factura.getEstado() == EstadoFactura.RECHAZADA) {
-                rechazadas++;
-            }
-            if (factura.getEstado() == EstadoFactura.PENDIENTE_DE_COBRO) {
-                pendientes++;
-            }
-        }
-        System.out.println("--- REPORTE ---");
-        System.out.println("Turnos: " + contadorTurnos.total()
-                + " (urgentes: " + contadorTurnos.urgentes() + ")");
-        System.out.println("Facturado: $" + facturado);
-        System.out.println("Cobrado: $" + cobros.getTotalCobrado());
-        System.out.println("Rechazadas: " + rechazadas + " / Pendientes: " + pendientes);
+  private void registrarEstudio(Scanner sc) {
+    Paciente paciente = pedirPacienteExistente(sc);
+    if (paciente == null) {
+      return;
     }
+    salida.println("Importe:");
+    double importe = Double.parseDouble(sc.nextLine().trim());
+    estudios.registrar(new Estudio(paciente.getNumero(), importe));
+    salida.println("Estudio registrado para " + paciente.getNombre());
+  }
+
+  private void facturar(Scanner sc) {
+    Paciente paciente = pedirPacienteExistente(sc);
+    if (paciente == null) {
+      return;
+    }
+    int turnos = agenda.turnosDe(paciente.getNumero());
+    Optional<Factura> emitida =
+        facturacion.facturarPendientes(paciente.getNumero(), paciente.getCobertura(), turnos);
+    if (emitida.isEmpty()) {
+      salida.println(
+          "No se emitio factura: " + paciente.getNombre() + " no tiene estudios pendientes");
+      return;
+    }
+    Factura factura = emitida.get();
+    salida.println(
+        "Factura "
+            + factura.getNumero()
+            + " para "
+            + paciente.getNombre()
+            + ": "
+            + factura.getCantidadDeEstudios()
+            + " estudios, total $"
+            + factura.getTotal());
+  }
+
+  private void cobrarFactura(Scanner sc) {
+    salida.println("Nro de factura:");
+    int nf = Integer.parseInt(sc.nextLine().trim());
+    Optional<Factura> buscada = facturas.buscar(nf);
+    if (buscada.isEmpty()) {
+      salida.println("No existe la factura " + nf);
+      return;
+    }
+    Factura factura = buscada.get();
+    ResultadoPago resultado = cobros.cobrar(factura);
+    switch (resultado.getEstado()) {
+      case NO_DISPONIBLE:
+        salida.println("Pasarela no disponible, reintente");
+        break;
+      case RECHAZADO:
+        salida.println("Cobro RECHAZADO factura " + nf);
+        break;
+      default:
+        salida.println(
+            "Cobro APROBADO factura " + nf + " cod " + resultado.getCodigoAutorizacion());
+    }
+  }
+
+  private void emitirReporte() {
+    double facturado = 0;
+    int rechazadas = 0;
+    int pendientes = 0;
+    for (Factura factura : facturas.todas()) {
+      facturado = facturado + factura.getTotal();
+      if (factura.getEstado() == EstadoFactura.RECHAZADA) {
+        rechazadas++;
+      }
+      if (factura.getEstado() == EstadoFactura.PENDIENTE_DE_COBRO) {
+        pendientes++;
+      }
+    }
+    salida.println("--- REPORTE ---");
+    salida.println("Turnos: " + agenda.total() + " (urgentes: " + agenda.urgentes() + ")");
+    salida.println("Facturado: $" + facturado);
+    salida.println("Cobrado: $" + cobros.getTotalCobrado());
+    salida.println("Rechazadas: " + rechazadas + " / Pendientes: " + pendientes);
+  }
 }
