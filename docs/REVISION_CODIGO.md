@@ -1,6 +1,6 @@
 # Code review de la versión refactorizada
 
-**Alcance:** diff `estado-inicial..4b15fc3` (refactorings R1 a R6, suite de pruebas y compuerta Maven).
+**Alcance:** diff `estado-inicial..78d5ccc` (refactorings R1 a R6, suite de pruebas y compuerta Maven).
 **Autor:** Ivan Daniliuk. **Revisor:** asistente de IA declarado (Claude), según ADR-0004. El autor responde cada observación y decide si se acepta.
 **Herramientas usadas en la revisión:** golden master, 35 pruebas JUnit, Checkstyle 10.21.4 y PMD 7.7.0 con la configuración de la DoD (`config/`).
 
@@ -47,3 +47,23 @@ La etapa se aprueba cuando se cumplen todas estas condiciones:
 3. Cada corrección que cambia el comportamiento (F1 a F6) tiene su Issue, actualiza la salida esperada del golden master y explica en el commit qué cambió y por qué.
 4. Cada refactor de la revisión (O5 a O7) deja el golden master sin cambios.
 5. Las observaciones [Baja] aceptadas como deuda quedan registradas como Issue.
+
+## 4. Estado final de las observaciones
+
+| Id | Estado | Commit |
+|---|---|---|
+| O1 | Corregida | `d959343` fix(F1) y `0020be7` fix(F2) |
+| O2 | Corregida | `4298681` fix(F3) |
+| O3 | Corregida | `94c648c` fix(F4) |
+| O4 | Corregida | `0586b6d` fix(F5) |
+| O5 | Corregida, golden master sin cambios | `b5e2991` refactor(review) |
+| O6 | Corregida, golden master sin cambios | `b5e2991` refactor(review) |
+| O7 | Corregida, golden master sin cambios | `b5e2991` refactor(review) |
+| O8 | Corregida | `6dd10cb` fix(F6) |
+| O9 | Aceptada como deuda | Issue de deuda técnica |
+| O10 | Respondida, sin cambios | Glosario, término Bonificación por frecuencia |
+| O11 | Aceptada como deuda | Issue de deuda técnica |
+
+**O11 [Baja], detectada al corregir F3.** Los importes se manejan con `double`. La factura de Carla quedó en $250.495, un valor con medio centavo que no se puede cobrar. Pasar a `BigDecimal` con redondeo a dos decimales cambia todas las salidas de la consola, así que se registra como mejora futura con su propia Issue.
+
+Verificación de los criterios de aceptación en `etapa-pruebas`: 41 pruebas en verde, cobertura de 96,8 % de líneas y 92,9 % de ramas, 0 violaciones de Checkstyle, PMD y CPD (`evidencias/RESUMEN.md`). No quedan observaciones [Alta] ni [Media] abiertas.
